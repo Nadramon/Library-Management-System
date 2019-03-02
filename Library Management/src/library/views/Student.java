@@ -1,4 +1,4 @@
-package library.common;
+package library.views;
 
 public class Student {
 
