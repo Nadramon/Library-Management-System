@@ -24,7 +24,7 @@ public class LibraryUI {
 	private JPasswordField password;
 	private JTextField username;
 	private JButton btnNewUser;
-	private ManageUsers students;
+	public ManageUsers students;
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +56,7 @@ public class LibraryUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 600, 400);
+		frame.setBounds(100, 100, 507, 315);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		btnNewUser = new JButton("New User");
@@ -76,13 +76,14 @@ public class LibraryUI {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(btnLogin)
-							.addGap(68)
-							.addComponent(btnNewUser))
+					.addGap(35)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(35)
+							.addComponent(btnLogin)
+							.addGap(58)
+							.addComponent(btnNewUser)
+							.addGap(8))
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblUsername)
 								.addComponent(lblPassword))
@@ -90,7 +91,7 @@ public class LibraryUI {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(username)
 								.addComponent(password, GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))))
-					.addContainerGap(222, Short.MAX_VALUE))
+					.addContainerGap(129, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -103,11 +104,11 @@ public class LibraryUI {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(password, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblPassword))
-					.addPreferredGap(ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+					.addGap(26)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnLogin)
 						.addComponent(btnNewUser))
-					.addGap(112))
+					.addGap(92))
 		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
@@ -139,7 +140,8 @@ public class LibraryUI {
 		
 		btnNewUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Register reg = new Register();
+				reg.setVisible(true);
 			}
 		});
 		

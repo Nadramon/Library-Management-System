@@ -19,7 +19,10 @@ public class ManageUsers {
 		return studentList;
 	}
 	
-	
+	public void addStudent(Student name) {
+		studentList.add(name);
+		
+	}
 	
 //	public static void main(String[] args) {
 //
