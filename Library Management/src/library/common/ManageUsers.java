@@ -1,3 +1,4 @@
+package library.common;
 import java.util.ArrayList;
 
 public class ManageUsers {
@@ -16,10 +17,7 @@ public class ManageUsers {
 		Student sally = new Student("Sally", "Swings", 435, 3, true);
 		studentList.add(sally);
 		
-		
-		ManageUsersGUI obama = new ManageUsersGUI(studentList);
-		//obama.startGUI(studentList);
-		
+	
 	}
 	
 	

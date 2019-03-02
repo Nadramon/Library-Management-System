@@ -1,3 +1,4 @@
+package library.common;
 
 public class Student {
 
