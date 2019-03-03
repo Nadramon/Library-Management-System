@@ -118,15 +118,16 @@ public class Register extends JDialog {
 	private void createEvents() {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				students = new ManageUsers();
-				ArrayList<Student> stu = students.getStudentList();
+				ArrayList<Student> stu = students.getActiveList();
 				String fName = firstName.getText();
 				String lName = lastName.getText();	
 				String uc = iD.getText();
 				//int ucid = Integer.parseInt(uc);
 				Student ins = new Student(fName, lName, 69, 0, true);
-				students.addStudent(ins);	
-			
+				stu.add(ins);	
+				dispose();
 			}
 		});
 		

@@ -118,14 +118,14 @@ public class LibraryUI {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
 				students = new ManageUsers();
-				ArrayList<Student> stu = students.getStudentList();
+				ArrayList<Student> stu = students.getActiveList();
 				String user = username.getText();
 				String pass = password.getText();
 				boolean loggy = false ;
 				for(int x = 0; x < stu.size(); x++) {
 					if (stu.get(x).getFirstName().compareTo(user) == 0) {
 						if(stu.get(x).getLastName().compareTo(pass) == 0) {
-							Login log = new Login();
+							Login log = new Login(students);
 							log.setVisible(true);
 							loggy = true;
 						}
