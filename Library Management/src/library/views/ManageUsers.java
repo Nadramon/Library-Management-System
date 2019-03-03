@@ -1,58 +1,41 @@
 package library.views;
-
 import java.util.ArrayList;
 
 public class ManageUsers {
 
-	static ArrayList<Student> activeList = new ArrayList<Student>();
-	static ArrayList<Student> archiveList = new ArrayList<Student>();
+	private ArrayList<Student> studentList;
 	
-	public ManageUsers() {
-		
+	public ManageUsers(){
+		studentList = new ArrayList<Student>();
 		Student james = new Student("James", "Obama", 213, 23, true);
-		activeList.add(james);
+		studentList.add(james);
 		Student bob = new Student("Bob", "Bobb", 123, 5, true);
-		activeList.add(bob);
+		studentList.add(bob);
 		Student sally = new Student("Sally", "Swings", 435, 3, true);
-		activeList.add(sally);
+		studentList.add(sally);
 	}
 	
-	public ArrayList<Student> getactiveList(){
-		return activeList;
-	}
-	
-	public ArrayList<Student> getarchiveList(){
-		return archiveList;
+	public ArrayList<Student> getStudentList(){
+		return studentList;
 	}
 	
 	public void addStudent(Student name) {
-		activeList.add(name);
+		studentList.add(name);
 		
 	}
 	
-	public static void main(String[] args) {
-
+//	public static void main(String[] args) {
+//
 //		//make fake students
 //		Student james = new Student("James", "Obama", 213, 23, true);
-//		activeList.add(james);
+//		studentList.add(james);
 //		Student bob = new Student("Bob", "Bobb", 123, 5, true);
-//		activeList.add(bob);
+//		studentList.add(bob);
 //		Student sally = new Student("Sally", "Swings", 435, 3, true);
-//		activeList.add(sally);
+//		studentList.add(sally);
 //		
-//		
-//		
-//		Student tina = new Student("Tina", "Tyna", 2311, 5, false);
-//		archiveList.add(tina);
-//		Student michael = new Student("Michael", "Mann", 111, 3, false);
-//		archiveList.add(michael);
-		
-		
-		
-		ManageUsersGUI obama = new ManageUsersGUI(activeList, archiveList);
-		//obama.startGUI(studentList);
-		
-	}
+//	
+//	}
 	
 	
 	
