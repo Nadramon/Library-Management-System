@@ -43,6 +43,7 @@ public class Register extends JDialog {
 	 * Create the dialog.
 	 */
 	public Register() {
+		createEvents();
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,7 +66,6 @@ public class Register extends JDialog {
 		JLabel lblUcid = new JLabel("UCID");
 		
 		tee = new JTextField();
-		tee.setText("T");
 		tee.setColumns(10);
 		
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
@@ -112,23 +112,22 @@ public class Register extends JDialog {
 					.addContainerGap())
 		);
 		contentPanel.setLayout(gl_contentPanel);
-		createEvents();
+
 	}
 
 	private void createEvents() {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				students = new ManageUsers();
-				ArrayList<Student> stu = students.getStudentList();
-				String fName = firstName.getText();
-				String lName = lastName.getText();	
-				String uc = iD.getText();
-				//int ucid = Integer.parseInt(uc);
-				Student ins = new Student(fName, lName, 69, 0, true);
-				students.addStudent(ins);	
-				//LibraryUI lol = new LibraryUI();
-				//lol.setVisible(true);
-				tee.setText("llll");
+				dispose();
+//				students = new ManageUsers();
+//				ArrayList<Student> stu = students.getStudentList();
+//				String fName = firstName.getText();
+//				String lName = lastName.getText();	
+//				String uc = iD.getText();
+//				//int ucid = Integer.parseInt(uc);
+//				Student ins = new Student(fName, lName, 69, 0, true);
+//				students.addStudent(ins);	
+				tee.setText("lol");
 			}
 		});
 		
