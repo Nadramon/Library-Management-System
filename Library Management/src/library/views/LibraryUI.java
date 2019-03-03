@@ -16,8 +16,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
+import javax.swing.JFrame;
 
-public class LibraryUI {
+public class LibraryUI extends JFrame {
 
 	private JFrame frame;
 	private JButton btnLogin;

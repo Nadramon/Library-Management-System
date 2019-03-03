@@ -126,7 +126,9 @@ public class Register extends JDialog {
 				//int ucid = Integer.parseInt(uc);
 				Student ins = new Student(fName, lName, 69, 0, true);
 				students.addStudent(ins);	
-			
+				//LibraryUI lol = new LibraryUI();
+				//lol.setVisible(true);
+				tee.setText("llll");
 			}
 		});
 		
