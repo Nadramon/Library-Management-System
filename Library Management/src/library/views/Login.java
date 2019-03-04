@@ -20,6 +20,7 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtSuccessfulLogin;
 	private JButton btnManageUsers;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -40,7 +41,7 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login(ManageUsers stu) {
+	public Login(ManageUsers users) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -53,32 +54,49 @@ public class Login extends JFrame {
 		
 		btnManageUsers = new JButton("Manage Users");
 		
+		btnBack = new JButton("Back");
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(145)
-					.addComponent(btnManageUsers))
+					.addGap(22)
+					.addComponent(btnManageUsers)
+					.addPreferredGap(ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+					.addComponent(btnBack)
+					.addGap(37))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-					.addComponent(btnManageUsers)
-					.addGap(75))
+					.addPreferredGap(ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnManageUsers)
+						.addComponent(btnBack))
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
-		createEvents(stu);
+		createEvents(users);
 	}
 
-	private void createEvents(ManageUsers ss) {
+	private void createEvents(ManageUsers users) {
 		btnManageUsers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			ArrayList<Student> archiveList = ss.getArchiveList();
-			ArrayList<Student> activeList = ss.getActiveList();
-			ManageUsersGUI obama = new ManageUsersGUI(activeList, archiveList);
+			ArrayList<Student> archiveList = users.getArchiveList();
+			ArrayList<Student> activeList = users.getActiveList();
+			ManageUsersGUI manageUsers = new ManageUsersGUI(activeList, archiveList);
+			dispose();
+			}
+		});
+		
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LibraryUI lib = new LibraryUI();
+				lib.getFrame().setVisible(true);
+				dispose();
 			}
 		});
 	}

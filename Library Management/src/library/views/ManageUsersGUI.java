@@ -26,6 +26,10 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
 
 public class ManageUsersGUI {
 
@@ -38,9 +42,9 @@ public class ManageUsersGUI {
 	private JLabel lblNewLabel;
 	private JTable table_1;
 	private JButton btnNewButton_1;
-	private JTable table_2;
 	private DefaultTableModel dataActive;
 	private DefaultTableModel dataArchive;
+	private ManageUsers user = new ManageUsers();
 
 	/**
 	 * Launch the application.
@@ -85,7 +89,7 @@ public class ManageUsersGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 572, 603);
+		frame.setBounds(100, 100, 587, 505);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -103,20 +107,20 @@ public class ManageUsersGUI {
 			dataActive.addRow(new Object[] {x, activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getUcid(), activeList.get(x).getCurrentBorrowing()});
 		}
 		
-		
-		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
-		
 		lblActiveDatabase = new JLabel("Active Accounts");
+		lblActiveDatabase.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblActiveDatabase.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(lblActiveDatabase);
 		
 		table = new JTable();
 		
 		
 		table.setModel(dataActive);
-		frame.getContentPane().add(table);
 		
 		btnNewButton = new JButton("Move to Archive");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -168,18 +172,10 @@ public class ManageUsersGUI {
 				
 			}
 		});
-
-		
-		
-		
-		frame.getContentPane().add(btnNewButton);
-		
-		table_2 = new JTable();
-		frame.getContentPane().add(table_2);
 		
 		lblNewLabel = new JLabel("Archived Accounts");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(lblNewLabel);
 		
 		
 		
@@ -204,7 +200,6 @@ public class ManageUsersGUI {
 		
 		table_1 = new JTable();
 		table_1.setModel(dataArchive);
-		frame.getContentPane().add(table_1);
 		
 		btnNewButton_1 = new JButton("Move to Active");
 		
@@ -261,9 +256,53 @@ public class ManageUsersGUI {
 			}
 		});
 		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login log = new Login(user);
+				log.setVisible(true);
+				frame.dispose();
+				
+			}
+		});
 		
 		
-		frame.getContentPane().add(btnNewButton_1);
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblActiveDatabase, GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+					.addGap(24))
+				.addComponent(lblNewLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				.addComponent(table, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				.addComponent(table_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+					.addComponent(btnBack)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(lblActiveDatabase, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(table, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+					.addGap(28)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(table_1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnBack))
+					.addGap(134))
+		);
+		frame.getContentPane().setLayout(groupLayout);
 		
 	}
 	
@@ -271,5 +310,4 @@ public class ManageUsersGUI {
 	public void createStudents() {
 		
 	}
-
 }

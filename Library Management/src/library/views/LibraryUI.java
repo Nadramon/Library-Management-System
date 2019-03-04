@@ -1,5 +1,6 @@
 package library.views;
 import java.awt.EventQueue;
+import java.awt.Window;
 
 import javax.swing.JFrame;
 import java.awt.Button;
@@ -16,6 +17,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
+import java.awt.Font;
 
 public class LibraryUI {
 
@@ -28,6 +30,8 @@ public class LibraryUI {
 	/**
 	 * Launch the application.
 	 */
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,6 +43,10 @@ public class LibraryUI {
 				}
 			}
 		});
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 
 	/**
@@ -60,8 +68,6 @@ public class LibraryUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		btnNewUser = new JButton("New User");
-		
-		
 		btnLogin = new JButton("Login");
 		
 		username = new JTextField();
@@ -72,31 +78,41 @@ public class LibraryUI {
 		JLabel lblUsername = new JLabel("Username");
 		JLabel lblPassword = new JLabel("Password");
 		
+		JLabel lblLibraryManagementSystem = new JLabel("Library Management System");
+		lblLibraryManagementSystem.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(35)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnLogin)
-							.addGap(58)
-							.addComponent(btnNewUser)
-							.addGap(8))
-						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(35)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblUsername)
-								.addComponent(lblPassword))
-							.addGap(55)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(username)
-								.addComponent(password, GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))))
-					.addContainerGap(129, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnLogin)
+									.addGap(58)
+									.addComponent(btnNewUser)
+									.addGap(8))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblUsername)
+										.addComponent(lblPassword))
+									.addGap(55)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(username)
+										.addComponent(password, GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(68)
+							.addComponent(lblLibraryManagementSystem)))
+					.addContainerGap(68, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(96)
+					.addGap(25)
+					.addComponent(lblLibraryManagementSystem)
+					.addGap(37)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblUsername)
 						.addComponent(username, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -128,6 +144,7 @@ public class LibraryUI {
 							Login log = new Login(students);
 							log.setVisible(true);
 							loggy = true;
+							frame.dispose();
 						}
 					}
 				}
@@ -136,6 +153,8 @@ public class LibraryUI {
 					fail.setVisible(true);
 				}
 			}
+
+		
 		});
 		
 		btnNewUser.addActionListener(new ActionListener() {
