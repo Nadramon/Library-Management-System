@@ -19,7 +19,6 @@ import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.SpringLayout;
 import javax.swing.JSeparator;
 import java.awt.Color;

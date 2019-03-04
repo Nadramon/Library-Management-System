@@ -65,7 +65,7 @@ public class Register extends JDialog {
 		JLabel lblUcid = new JLabel("UCID");
 		
 		tee = new JTextField();
-		tee.setText("T");
+	
 		tee.setColumns(10);
 		
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
