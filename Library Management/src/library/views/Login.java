@@ -81,6 +81,47 @@ public class Login extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 		createEvents(users);
 	}
+	
+	public Login(Student s, ManageUsers users) {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        
+        txtSuccessfulLogin = new JTextField();
+        txtSuccessfulLogin.setText("Logged in as: " + s.getFirstName() + " " + s.getLastName() + ", current books: " + s.getCurrentBorrowing());
+        txtSuccessfulLogin.setColumns(10);
+        
+        btnManageUsers = new JButton("Manage Users");
+        
+        btnBack = new JButton("Back");
+        
+        
+        GroupLayout gl_contentPane = new GroupLayout(contentPane);
+        gl_contentPane.setHorizontalGroup(
+            gl_contentPane.createParallelGroup(Alignment.LEADING)
+                .addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
+                .addGroup(gl_contentPane.createSequentialGroup()
+                    .addGap(22)
+                    .addComponent(btnManageUsers)
+                    .addPreferredGap(ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                    .addComponent(btnBack)
+                    .addGap(37))
+        );
+        gl_contentPane.setVerticalGroup(
+            gl_contentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_contentPane.createSequentialGroup()
+                    .addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                    .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(btnManageUsers)
+                        .addComponent(btnBack))
+                    .addContainerGap())
+        );
+        contentPane.setLayout(gl_contentPane);
+        createEvents(users);
+    }
 
 	private void createEvents(ManageUsers users) {
 		btnManageUsers.addActionListener(new ActionListener() {
