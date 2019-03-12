@@ -28,17 +28,21 @@ import java.awt.event.WindowEvent;
 public class ManageUsersGUI {
 
 	private JFrame frame;
+	private JFrame frame1;
 	private JTable table;
 	private ArrayList<Student> activeList = new ArrayList<Student>();
 	private ArrayList<Student> archiveList = new ArrayList<Student>();
 	private JLabel lblActiveDatabase;
 	private JButton btnNewButton;
+	private JButton switch1;
+	private JButton switch2;
 	private JLabel lblNewLabel;
 	private JTable table_1;
 	private JButton btnNewButton_1;
 	private JTable table_2;
 	private DefaultTableModel dataActive;
 	private DefaultTableModel dataArchive;
+	private String header[];
 
 	/**
 	 * Launch the application.
@@ -70,6 +74,8 @@ public class ManageUsersGUI {
 		try {
 			this.initialize();
 			this.frame.setVisible(true);
+			this.aaa();
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,7 +89,7 @@ public class ManageUsersGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 572, 603);
+		frame.setBounds(100, 100, 572, 384);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -91,7 +97,7 @@ public class ManageUsersGUI {
 		dataActive = new DefaultTableModel(0, 0);
 		
 		
-		String header[] = new String[] {"Number", "First Name", "Last Name", "UCID", "Borrowing"};
+		header = new String[] {"Number", "First Name", "Last Name", "UCID", "Borrowing"};
 		
 		dataActive.setColumnIdentifiers(header);
 		
@@ -103,6 +109,26 @@ public class ManageUsersGUI {
 		
 		
 		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		
+		
+		switch1 = new JButton("Switch Table");
+		
+		
+		switch1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				frame.setVisible(false);
+				frame1.setVisible(true);
+			}
+		});
+		
+		
+		
+		frame.getContentPane().add(switch1);
+		
+		
+		
 		
 		lblActiveDatabase = new JLabel("Active Accounts");
 		lblActiveDatabase.setHorizontalAlignment(SwingConstants.CENTER);
@@ -172,12 +198,53 @@ public class ManageUsersGUI {
 		
 		frame.getContentPane().add(btnNewButton);
 		
-		table_2 = new JTable();
-		frame.getContentPane().add(table_2);
 		
+		
+		
+		
+	}
+	
+	
+	private void aaa() {
+		frame1 = new JFrame();
+		frame1.setBounds(100, 100, 572, 384);
+		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		
+		
+		
+		frame1.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		
+		
+		
+		switch2 = new JButton("Switch Table");
+		
+		
+		switch2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				frame1.setVisible(false);
+				frame.setVisible(true);
+			}
+		});
+		
+		
+		
+		frame1.getContentPane().add(switch2);
+		
+		
+		
+		
+		
+		
+		
+		
+
 		lblNewLabel = new JLabel("Archived Accounts");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(lblNewLabel);
+		frame1.getContentPane().add(lblNewLabel);
 		
 		
 		
@@ -193,16 +260,9 @@ public class ManageUsersGUI {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
 		table_1 = new JTable();
 		table_1.setModel(dataArchive);
-		frame.getContentPane().add(table_1);
+		frame1.getContentPane().add(table_1);
 		
 		btnNewButton_1 = new JButton("Move to Active");
 		
@@ -210,14 +270,8 @@ public class ManageUsersGUI {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//activeList.clear();
-				//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 				
-				//dataActive.removeRow(0);
-				//table.setModel(dataActive);
-				
-				
-				String idS = JOptionPane.showInputDialog(frame, "Which No. would you like to move?", null);
+				String idS = JOptionPane.showInputDialog(frame1, "Which No. would you like to move?", null);
 				
 				for (int x=0; x < archiveList.size(); x++) {
 					dataArchive.removeRow(1);
@@ -261,12 +315,7 @@ public class ManageUsersGUI {
 		
 		
 		
-		frame.getContentPane().add(btnNewButton_1);
-		
-	}
-	
-	
-	public void createStudents() {
+		frame1.getContentPane().add(btnNewButton_1);
 		
 	}
 
