@@ -145,6 +145,7 @@ public class Register extends JDialog {
 				String lName = lastName.getText();	
 				String uc = iD.getText();
 				int ucid = Integer.parseInt(uc);
+<<<<<<< HEAD
 				if (isStrong(pWord) == true) {
 					Student ins = new Student(fName, lName, ucid, 0, true, uName, pWord, false);
 					stu.add(ins);	
@@ -154,6 +155,11 @@ public class Register extends JDialog {
 					lol.setVisible(true);
 					
 				}
+=======
+				Student ins = new Student(fName, lName, ucid, 0, true, false);
+				stu.add(ins);	
+				dispose();
+>>>>>>> origin/nadhif
 			}
 		});
 		
