@@ -188,14 +188,7 @@ public class ManageUsersGUI {
 		for (int x = 0; x <= archiveList.size() - 1; x++) {
 			dataArchive.addRow(new Object[] {x, archiveList.get(x).getFirstName(), archiveList.get(x).getLastName(), archiveList.get(x).getUcid(), archiveList.get(x).getCurrentBorrowing()});
 		}
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		table_1 = new JTable();
 		table_1.setModel(dataArchive);
@@ -223,8 +216,6 @@ public class ManageUsersGUI {
 					dataActive.removeRow(1);
 				}
 				
-				
-				
 				int id = Integer.parseInt(idS);
 				
 				activeList.add(archiveList.get(id));
@@ -236,14 +227,10 @@ public class ManageUsersGUI {
 				}
 				
 				
-				
-								
-				
+
 				table_1.setModel(dataArchive);
 				
-				
-				
-				
+
 				for (int x = 0; x <= activeList.size() - 1; x++) {
 					dataActive.addRow(new Object[] {x, activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getUcid(), activeList.get(x).getCurrentBorrowing()});
 				}

@@ -14,6 +14,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
@@ -53,6 +54,8 @@ public class LibraryUI {
 	 * Create the application.
 	 */
 	public LibraryUI() {
+		Student ins = new Student("Admin", "", 01, 0, true, "admin", "admin", true);
+		students.getActiveList().add(ins);
 		initialize();
 		createEvents();
 	}
@@ -130,32 +133,38 @@ public class LibraryUI {
 	}
 	
 	private void createEvents() {
-		// TODO Auto-generated method stub
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { 
-				students = new ManageUsers();
-				ArrayList<Student> stu = students.getActiveList();
-				String user = username.getText();
-				String pass = password.getText();
-				boolean loggy = false ;
-				for(int x = 0; x < stu.size(); x++) {
-					if (stu.get(x).getFirstName().compareTo(user) == 0) {
-						if(stu.get(x).getLastName().compareTo(pass) == 0) {
-							Login log = new Login(students);
-							log.setVisible(true);
-							loggy = true;
-							frame.dispose();
-						}
-					}
-				}
-				if (loggy == false) {
-					FailLogin fail = new FailLogin();
-					fail.setVisible(true);
-				}
-			}
-
-		
-		});
+        // TODO Auto-generated method stub
+        btnLogin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) { 
+            	students = new ManageUsers();
+                ArrayList<Student> stu = students.getActiveList();
+                String user = username.getText();
+                String pass = password.getText();
+                boolean loggy = false ;
+                for(int x = 0; x < stu.size(); x++) {
+                    if (stu.get(x).getUsername().equals(user)) {
+                        if(stu.get(x).getPassword().equals(pass)) {
+                        		if(stu.get(x).getIsLibrarian() == true) {
+                        			Login log = new Login(stu.get(x), students);
+                        			log.setVisible(true);
+                        			loggy = true;
+                        			frame.dispose();
+                        		}
+                        		else {
+                        			StudentView stView = new StudentView(stu.get(x), students);
+                        			stView.setVisible(true);
+                        			loggy = true;
+                        			frame.dispose();
+                        		}
+                        	}
+                        }
+                    } 
+                if (loggy == false) {
+                    FailLogin fail = new FailLogin();
+                    fail.setVisible(true);
+                }
+            }
+        });
 		
 		btnNewUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
