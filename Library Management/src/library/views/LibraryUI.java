@@ -144,21 +144,21 @@ public class LibraryUI {
                 for(int x = 0; x < stu.size(); x++) {
                     if (stu.get(x).getUsername().equals(user)) {
                         if(stu.get(x).getPassword().equals(pass)) {
-                        	if(stu.get(x).getIsLibrarian() == true) {
-                            Login log = new Login(stu.get(x), students);
-                            log.setVisible(true);
-                            loggy = true;
-                            frame.dispose();
-                        	}
-                        	else {
-                        		StudentView stView = new StudentView(stu.get(x), students);
-                        		stView.setVisible(true);
-                        		loggy = true;
-                        		frame.dispose();
+                        		if(stu.get(x).getIsLibrarian() == true) {
+                        			Login log = new Login(stu.get(x), students);
+                        			log.setVisible(true);
+                        			loggy = true;
+                        			frame.dispose();
+                        		}
+                        		else {
+                        			StudentView stView = new StudentView(stu.get(x), students);
+                        			stView.setVisible(true);
+                        			loggy = true;
+                        			frame.dispose();
+                        		}
                         	}
                         }
-                    }
-                }
+                    } 
                 if (loggy == false) {
                     FailLogin fail = new FailLogin();
                     fail.setVisible(true);

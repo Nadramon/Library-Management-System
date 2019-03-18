@@ -145,12 +145,33 @@ public class Register extends JDialog {
 				String lName = lastName.getText();	
 				String uc = iD.getText();
 				int ucid = Integer.parseInt(uc);
-				Student ins = new Student(fName, lName, ucid, 0, true, uName, pWord, false);
-				stu.add(ins);	
-				//ins.generatePassword(pWord);
-				dispose();
+				if (isStrong(pWord) == true) {
+					Student ins = new Student(fName, lName, ucid, 0, true, uName, pWord, false);
+					stu.add(ins);	
+					dispose();
+				}else {
+					WeakPasswordView lol = new WeakPasswordView();
+					lol.setVisible(true);
+					
+				}
 			}
 		});
 		
 	}
+	
+	public static boolean isStrong(String pWord) {
+        boolean strongPword = false;
+        if (pWord.length() >= 8) {
+            if (pWord.matches(".*\\d+.*")){
+                if (pWord.matches(".*[a-z]+.*")) {
+                    if (pWord.matches(".*[A-Z]+.*")) {
+                        if (!pWord.contains("\\s")) {
+                            strongPword = true;
+                        }
+                    }
+                }
+            }
+        }
+        return strongPword;
+    }
 }
