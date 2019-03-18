@@ -3,16 +3,16 @@ package library.views;
 import java.util.ArrayList;
 
 public class Material {
-    String type;
-    String name;
+    private String type;
+    private String name;
     
-    boolean isAReferenceMaterial = false;
+    private boolean isAReferenceMaterial = false;
     
-    int countAvailable;
-    int totalInLibrary;
+    private int countAvailable;
+    private int totalInLibrary;
     
-    ArrayList<Integer> outMaterials;
-    ArrayList<Integer> availableMaterials;
+    private ArrayList<Integer> outMaterials;
+    private ArrayList<Integer> availableMaterials;
     
     public Material(String objType, String n, boolean isRef) {
         type = objType;
@@ -20,6 +20,36 @@ public class Material {
         outMaterials = new ArrayList<Integer>();
         availableMaterials = new ArrayList<Integer>();
         isAReferenceMaterial = isRef;
+        totalInLibrary = 0;
+        countAvailable = 0;
+    }
+
+    public Material(String objType, String n, boolean isRef, int id) {
+        this(objType, n, isRef);
+        totalInLibrary = 1;
+        countAvailable = 1;
+        availableMaterials.add(id);
+    }
+    
+    /**
+     * @return the isAReferenceMaterial
+     */
+    public boolean isAReferenceMaterial() {
+        return isAReferenceMaterial;
+    }
+
+    /**
+     * @return the outMaterials
+     */
+    public ArrayList<Integer> getOutMaterials() {
+        return outMaterials;
+    }
+
+    /**
+     * @return the availableMaterials
+     */
+    public ArrayList<Integer> getAvailableMaterials() {
+        return availableMaterials;
     }
 
     /**
@@ -45,9 +75,22 @@ public class Material {
         }
     }
     
-    public void removeItems(int amount) {
-        if (amount > 0 && amount <= totalInLibrary) {
-            totalInLibrary -= amount;
+    public void addItem(int id) {
+        totalInLibrary += 1;
+        availableMaterials.add(id);
+        countAvailable += 1;
+    }
+    
+    public void addOrderedItem(int id) {
+        totalInLibrary += 1;
+        outMaterials.add(id);
+    }
+    
+    public void removeItem(int id) {
+        if (availableMaterials.contains(id)) {
+            availableMaterials.remove(id);
+            totalInLibrary -= 1;
+            countAvailable -= 1;
         }
     }
     
