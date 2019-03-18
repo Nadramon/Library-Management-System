@@ -48,7 +48,11 @@ public class StudentView extends JFrame {
 		
 		JButton btnSearchForBook = new JButton("Search for Book");
 		
-		JButton btnSearchForMaterial = new JButton("Search for Material");
+		JButton btnSearchForMaterial = new JButton("Search/Order for Material");
+		btnSearchForMaterial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		JButton btnBorrowBook = new JButton("Borrow Book");
 		
