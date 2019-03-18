@@ -125,7 +125,7 @@ public class Register extends JDialog {
 				String lName = lastName.getText();	
 				String uc = iD.getText();
 				int ucid = Integer.parseInt(uc);
-				Student ins = new Student(fName, lName, ucid, 0, true);
+				Student ins = new Student(fName, lName, ucid, 0, true, false);
 				stu.add(ins);	
 				dispose();
 			}

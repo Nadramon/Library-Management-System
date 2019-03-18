@@ -32,17 +32,20 @@ import java.awt.Font;
 
 public class ManageUsersGUI {
 
-	private JFrame frame;
-	private JTable table;
+	private JFrame activeFrame;
+	private JFrame archivedFrame;
+	private JTable activeTable;
 	private ArrayList<Student> activeList = new ArrayList<Student>();
 	private ArrayList<Student> archiveList = new ArrayList<Student>();
-	private JLabel lblActiveDatabase;
-	private JButton btnNewButton;
-	private JLabel lblNewLabel;
-	private JTable table_1;
-	private JButton btnNewButton_1;
+	private JLabel activeLabel;
+	private JButton moveToArchiveBtn;
+	private JLabel archivedLabel;
+	private JTable archivedTable;
+	private JButton moveToActiveBtn;
 	private DefaultTableModel dataActive;
 	private DefaultTableModel dataArchive;
+	private String[] header;
+	
 	private ManageUsers user = new ManageUsers();
 
 	/**
@@ -53,7 +56,7 @@ public class ManageUsersGUI {
 			public void run() {
 				try {
 					//ManageUsersGUI window = new ManageUsersGUI();
-					//window.frame.setVisible(true);
+					//window.activeFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,8 +76,9 @@ public class ManageUsersGUI {
 		
 		
 		try {
-			this.initialize();
-			this.frame.setVisible(true);
+			initActive();
+			//this.initArchived();
+			activeFrame.setVisible(true);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -84,97 +88,172 @@ public class ManageUsersGUI {
 
 
 	/**
-	 * Initialize the contents of the frame.
+	 * initActive the contents of the activeFrame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 587, 505);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private void initActive() {
+		activeFrame = new JFrame();
+		activeFrame.setBounds(100, 100, 587, 505);
+		activeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
 		
 		dataActive = new DefaultTableModel(0, 0);
 		
 		
-		String header[] = new String[] {"Number", "First Name", "Last Name", "UCID", "Borrowing"};
+		header = new String[] {"UCID", "First Name", "Last Name", "Borrowing"};
 		
 		dataActive.setColumnIdentifiers(header);
 		
-		dataActive.addRow(new Object[] {"No.", "F Name", "L Name", "UCID", "Borrowing"});
+		dataActive.addRow(new Object[] {"UCID", "F Name", "L Name", "Borrowing"});
 		
 		for (int x = 0; x <= activeList.size() - 1; x++) {
-			dataActive.addRow(new Object[] {x, activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getUcid(), activeList.get(x).getCurrentBorrowing()});
+			dataActive.addRow(new Object[] {activeList.get(x).getUcid(), activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getCurrentBorrowing()});
 		}
 		
-		lblActiveDatabase = new JLabel("Active Accounts");
-		lblActiveDatabase.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblActiveDatabase.setHorizontalAlignment(SwingConstants.CENTER);
+		activeLabel = new JLabel("Active Accounts");
+		activeLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		activeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		table = new JTable();
+		activeTable = new JTable();
 		
 		
-		table.setModel(dataActive);
+		activeTable.setModel(dataActive);
 		
-		btnNewButton = new JButton("Move to Archive");
-		btnNewButton.addActionListener(new ActionListener() {
+		moveToArchiveBtn = new JButton("Move to Archive");
+		moveToArchiveBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		moveToArchiveBtn.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				//activeList.clear();
-				//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			public void mouseClicked(MouseEvent e) {	
+				String idS = JOptionPane.showInputDialog(activeFrame, "Which person would you like to move? (Insert UCID)", null);
+				boolean success = false;
 				
-				//dataActive.removeRow(0);
-				//table.setModel(dataActive);
-				
-				
-				String idS = JOptionPane.showInputDialog(frame, "Which No. would you like to move?", null);
-				
-				for (int x=0; x < archiveList.size(); x++) {
-					dataArchive.removeRow(1);
+				try {
+					int id = Integer.parseInt(idS);
+					int index = 0;
+					for (int x = 0; x < activeList.size(); x++) {
+						if (id == activeList.get(x).getUcid()) {
+							index = x;
+							success = true;
+							break;
+						}
+						else {
+							success = false;
+						}
+					}
+					
+					
+					if (success) {
+						
+						for (int x=0; x < activeList.size(); x++) {
+							dataActive.removeRow(1);
+						}
+
+						archiveList.add(activeList.get(index));
+						activeList.remove(activeList.get(index));
+						
+						for (int x = 0; x <= activeList.size() - 1; x++) {
+							dataActive.addRow(new Object[] {activeList.get(x).getUcid(), activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getCurrentBorrowing()});
+						}
+						activeTable.setModel(dataActive);
+					}
+					else {
+						JOptionPane.showMessageDialog(activeFrame, "That person does not exist in the Active Table!", "Error", JOptionPane.WARNING_MESSAGE);
+					}
+					
 				}
-				
-				for (int x=0; x < activeList.size(); x++) {
-					dataActive.removeRow(1);
+				catch (Exception exception) {
+					JOptionPane.showMessageDialog(activeFrame, "Please input a number", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+
 				
+
 				
-				
-				int id = Integer.parseInt(idS);
-				
-				archiveList.add(activeList.get(id));
-				
-				activeList.remove(activeList.get(id));
-				
-				
-				for (int x = 0; x <= activeList.size() - 1; x++) {
-					dataActive.addRow(new Object[] {x, activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getUcid(), activeList.get(x).getCurrentBorrowing()});
-				}
-				
-								
-				
-				
-				
-				
-				table.setModel(dataActive);
-				
-				for (int x = 0; x <= archiveList.size() - 1; x++) {
-					dataArchive.addRow(new Object[] {x, archiveList.get(x).getFirstName(), archiveList.get(x).getLastName(), archiveList.get(x).getUcid(), archiveList.get(x).getCurrentBorrowing()});
-				}
-				
-				
-				
-				table_1.setModel(dataArchive);
+
+
 				
 			}
 		});
 		
-		lblNewLabel = new JLabel("Archived Accounts");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		JButton backBtn = new JButton("Back");
+		backBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login log = new Login(user);
+				log.setVisible(true);
+				activeFrame.dispose();
+				archivedFrame.dispose();
+				
+			}
+		});
+		
+		JButton switchBtn = new JButton("Switch Table");
+		switchBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				activeFrame.dispose();
+				initArchived();
+				archivedFrame.setVisible(true);
+				
+			}
+		});
+		
+		
+		
+		GroupLayout groupLayout = new GroupLayout(activeFrame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(activeLabel, GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+					.addGap(24))
+				//.addComponent(archivedLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				.addComponent(activeTable, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				//.addComponent(archivedTable, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(switchBtn, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(moveToArchiveBtn, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+					.addComponent(backBtn)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(activeLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(activeTable, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+					.addGap(28)
+					//.addComponent(archivedLabel, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					//.addComponent(archivedTable, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(switchBtn, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(moveToArchiveBtn, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(backBtn))
+					.addGap(134))
+		);
+		activeFrame.getContentPane().setLayout(groupLayout);
+		
+	}
+	
+
+	private void initArchived() {
+		
+		
+		archivedFrame = new JFrame();
+		archivedFrame.setBounds(100, 100, 587, 505);
+		archivedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		archivedLabel = new JLabel("Archived Accounts");
+		archivedLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		archivedLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		
 		
@@ -183,10 +262,10 @@ public class ManageUsersGUI {
 		
 		dataArchive.setColumnIdentifiers(header);
 		
-		dataArchive.addRow(new Object[] {"No.", "F Name", "L Name", "UCID", "Borrowing"});
+		dataArchive.addRow(new Object[] {"UCID", "F Name", "L Name", "Borrowing"});
 		
 		for (int x = 0; x <= archiveList.size() - 1; x++) {
-			dataArchive.addRow(new Object[] {x, archiveList.get(x).getFirstName(), archiveList.get(x).getLastName(), archiveList.get(x).getUcid(), archiveList.get(x).getCurrentBorrowing()});
+			dataArchive.addRow(new Object[] {archiveList.get(x).getUcid(), archiveList.get(x).getFirstName(), archiveList.get(x).getLastName(),  archiveList.get(x).getCurrentBorrowing()});
 		}
 		
 		
@@ -197,116 +276,127 @@ public class ManageUsersGUI {
 		
 		
 		
-		table_1 = new JTable();
-		table_1.setModel(dataArchive);
+		archivedTable = new JTable();
+		archivedTable.setModel(dataArchive);
 		
-		btnNewButton_1 = new JButton("Move to Active");
+		moveToActiveBtn = new JButton("Move to Active");
 		
 		
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		moveToActiveBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//activeList.clear();
-				//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 				
-				//dataActive.removeRow(0);
-				//table.setModel(dataActive);
+				String idS = JOptionPane.showInputDialog(archivedFrame, "Which person would you like to move? (Insert UCID)", null);
+				boolean success = false;
 				
 				
-				String idS = JOptionPane.showInputDialog(frame, "Which No. would you like to move?", null);
+				try {
+					int id = Integer.parseInt(idS);
+					int index = 0;
+					
+					for (int x = 0; x < archiveList.size(); x++) {
+						if (id == archiveList.get(x).getUcid()) {
+							index = x;
+							success = true;
+							break;
+						}
+						else {
+							success = false;
+						}
+					}
+					
+					if (success) {
+						for (int x=0; x < archiveList.size(); x++) {
+							dataArchive.removeRow(1);
+						}
+						
+						activeList.add(archiveList.get(index));
+						archiveList.remove(archiveList.get(index));
+						
+						for (int x = 0; x <= archiveList.size() - 1; x++) {
+							dataArchive.addRow(new Object[] {archiveList.get(x).getUcid(), archiveList.get(x).getFirstName(), archiveList.get(x).getLastName(), archiveList.get(x).getCurrentBorrowing()});
+						}				
+						archivedTable.setModel(dataArchive);
+					}
+					else {
+						JOptionPane.showMessageDialog(archivedFrame, "That person does not exist in the Archived Table!", "Error", JOptionPane.WARNING_MESSAGE);
+					}
 				
-				for (int x=0; x < archiveList.size(); x++) {
-					dataArchive.removeRow(1);
+				}
+				catch (Exception exception) {
+					JOptionPane.showMessageDialog(archivedFrame, "Please input a number", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				
-				for (int x=0; x < activeList.size(); x++) {
-					dataActive.removeRow(1);
-				}
-				
-				
-				
-				int id = Integer.parseInt(idS);
-				
-				activeList.add(archiveList.get(id));
-				
-				archiveList.remove(archiveList.get(id));
-				
-				for (int x = 0; x <= archiveList.size() - 1; x++) {
-					dataArchive.addRow(new Object[] {x, archiveList.get(x).getFirstName(), archiveList.get(x).getLastName(), archiveList.get(x).getUcid(), archiveList.get(x).getCurrentBorrowing()});
-				}
-				
-				
-				
-								
-				
-				table_1.setModel(dataArchive);
-				
-				
-				
-				
-				for (int x = 0; x <= activeList.size() - 1; x++) {
-					dataActive.addRow(new Object[] {x, activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getUcid(), activeList.get(x).getCurrentBorrowing()});
-				}
-				
-				
-				table.setModel(dataActive);
 				
 				
 			}
+			
+			
 		});
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
+		
+		JButton backBtn = new JButton("Back");
+		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login log = new Login(user);
 				log.setVisible(true);
-				frame.dispose();
+				activeFrame.dispose();
+				archivedFrame.dispose();
 				
 			}
 		});
 		
 		
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		JButton switchBtn = new JButton("Switch Table");
+		switchBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				archivedFrame.dispose();
+				initActive();
+				activeFrame.setVisible(true);
+				
+			}
+		});
+		
+		
+		GroupLayout groupLayout = new GroupLayout(archivedFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblActiveDatabase, GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+					.addComponent(archivedLabel, GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
 					.addGap(24))
-				.addComponent(lblNewLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-				.addComponent(table, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-				.addComponent(table_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				//.addComponent(archivedLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				.addComponent(archivedTable, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				//.addComponent(archivedTable, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+					.addComponent(switchBtn, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+					.addComponent(moveToActiveBtn, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
-					.addComponent(btnBack)
+					.addComponent(backBtn)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(lblActiveDatabase, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+					.addComponent(archivedLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+					.addComponent(archivedTable, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
 					.addGap(28)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(table_1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+					//.addComponent(archivedLabel, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+					//.addPreferredGap(ComponentPlacement.RELATED)
+					//.addComponent(archivedTable, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBack))
+						.addComponent(switchBtn, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(moveToActiveBtn, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(backBtn))
 					.addGap(134))
 		);
-		frame.getContentPane().setLayout(groupLayout);
+		
+		
+		archivedFrame.getContentPane().setLayout(groupLayout);
 		
 	}
-	
-	
-	public void createStudents() {
-		
-	}
+
 }

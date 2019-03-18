@@ -8,15 +8,17 @@ public class Student {
 	private int		ucid				= 0;
 	private int		currentBorrowing	= 0;
 	private boolean	isActive			= true;
+	private boolean isLibrarian			= false;
 	
 	
-	public Student(String fn, String ln, int id, int cb, boolean ia){
+	public Student(String fn, String ln, int id, int cb, boolean ia, boolean il){
 		
 		firstName 			= fn;
 		lastName			= ln;
 		ucid				= id;
 		currentBorrowing	= cb;
 		isActive			= ia;
+		isLibrarian			= il;
 	}
 
 
