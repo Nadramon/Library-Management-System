@@ -17,15 +17,14 @@ public class Student {
 	private int		ucid				= 0;
 	private int		currentBorrowing	= 0;
 	private boolean	isActive			= true;
-<<<<<<< HEAD
+
     private String  username            = "";
     private byte[]  password;
     private byte[]  salt;
     private String  passwordo 			= "";
     private boolean isLibrarian			= false;
-=======
-	private boolean isLibrarian			= false;
->>>>>>> origin/nadhif
+
+
 	
 	
 	public Student(String fn, String ln, int id, int cb, boolean ia, boolean il){

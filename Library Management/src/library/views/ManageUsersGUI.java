@@ -279,13 +279,6 @@ public class ManageUsersGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-<<<<<<< HEAD
-				int id = Integer.parseInt(idS);
-				
-				activeList.add(archiveList.get(id));
-				
-				archiveList.remove(archiveList.get(id));
-=======
 				String idS = JOptionPane.showInputDialog(archivedFrame, "Which person would you like to move? (Insert UCID)", null);
 				boolean success = false;
 				
@@ -321,22 +314,12 @@ public class ManageUsersGUI {
 					else {
 						JOptionPane.showMessageDialog(archivedFrame, "That person does not exist in the Archived Table!", "Error", JOptionPane.WARNING_MESSAGE);
 					}
->>>>>>> origin/nadhif
+
 				
 				}
-<<<<<<< HEAD
-				
-				
 
-				table_1.setModel(dataArchive);
-				
-
-				for (int x = 0; x <= activeList.size() - 1; x++) {
-					dataActive.addRow(new Object[] {x, activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getUcid(), activeList.get(x).getCurrentBorrowing()});
-=======
 				catch (Exception exception) {
 					JOptionPane.showMessageDialog(archivedFrame, "Please input a number", "Error", JOptionPane.ERROR_MESSAGE);
->>>>>>> origin/nadhif
 				}
 				
 				
@@ -412,3 +395,5 @@ public class ManageUsersGUI {
 	}
 
 }
+	
+
