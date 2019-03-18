@@ -54,6 +54,8 @@ public class LibraryUI {
 	 * Create the application.
 	 */
 	public LibraryUI() {
+		Student ins = new Student("Admin", "", 01, 0, true, "admin", "admin", true);
+		students.getActiveList().add(ins);
 		initialize();
 		createEvents();
 	}
@@ -160,7 +162,6 @@ public class LibraryUI {
                 if (loggy == false) {
                     FailLogin fail = new FailLogin();
                     fail.setVisible(true);
-                    frame.dispose();
                 }
             }
         });
