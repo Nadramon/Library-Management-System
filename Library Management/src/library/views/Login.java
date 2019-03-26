@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -12,7 +13,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
@@ -21,6 +25,9 @@ public class Login extends JFrame {
 	private JTextField txtSuccessfulLogin;
 	private JButton btnManageUsers;
 	private JButton btnBack;
+    private JButton btnBorrowMaterial; 
+    private JButton btnReturnMaterial;
+    private JButton btnReviewOrder;
 
 	/**
 	 * Launch the application.
@@ -100,11 +107,11 @@ public class Login extends JFrame {
         
         btnBack = new JButton("Back");
         
-        JButton btnBorrowMaterial = new JButton("Borrow material");
+        btnBorrowMaterial = new JButton("Borrow material");
         
-        JButton btnReturnMaterial = new JButton("Return Material");
+        btnReturnMaterial = new JButton("Return Material");
         
-        JButton btnReviewOrder = new JButton("Review Order");
+        btnReviewOrder = new JButton("Review Order");
         
         
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -167,5 +174,110 @@ public class Login extends JFrame {
 				dispose();
 			}
 		});
+		
+		
+		btnBorrowMaterial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String materialIdS = JOptionPane.showInputDialog(contentPane, "Enter the Material ID to lend:", null);
+				String studentIdS = JOptionPane.showInputDialog(contentPane, "Enter the Student ID it is for:", null);
+				boolean success = false;
+				try {
+					int materialId = Integer.parseInt(materialIdS);
+					int studentId = Integer.parseInt(studentIdS);
+					
+					//for loop to iterate to check if exists or not
+					//loop through available save file
+					success = true;
+					
+					if(success) {
+						
+						//first: check if student has less than 5 borrowings
+						//find student by id in save file, check borrowings value
+						
+						//if studentBorrow < 5: success
+						//else dont allow
+						if(success) {
+							
+						}
+						
+						else {
+							JOptionPane.showMessageDialog(contentPane, "The student has reached the limit for borrowing books!", "Error", JOptionPane.WARNING_MESSAGE);
+						}
+						
+						
+						
+					}
+					
+					else {
+						
+						JOptionPane.showMessageDialog(contentPane, "That material is not available right now!", "Error", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+				catch (Exception exception) {
+					JOptionPane.showMessageDialog(contentPane, "Please input a number", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+			
+			
+		});
+		
+		
+		
+		btnReturnMaterial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String idS = JOptionPane.showInputDialog(contentPane, "Enter the Material ID to return:", null);
+				boolean success = false;
+				try {
+					int id = Integer.parseInt(idS);
+					
+					//for loop to iterate to check if exists or not
+					success = true;
+					
+					if(success) {
+						
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						Date borrowDate = sdf.parse("2019-01-10");
+						
+						Date currentDate = new Date();
+						Calendar calendar = Calendar.getInstance();
+						calendar.setTime(borrowDate);
+						calendar.add(Calendar.DATE, 14);
+						Date deadline = sdf.parse(sdf.format(calendar.getTime()));
+						
+						//getting rid of it from student
+						
+						//String text2 = material.get(1) + " has been returned!";
+						String text2 = "bananas";
+						JOptionPane.showMessageDialog(contentPane, text2, "Status", JOptionPane.INFORMATION_MESSAGE);
+						
+						//success message
+						
+						if(currentDate.after(deadline)) {
+							String text = "The material was overdue.\nCurrent Date: " + currentDate.toString() + "\nDue Date: " + deadline.toString();
+							JOptionPane.showMessageDialog(contentPane, text, "Error", JOptionPane.WARNING_MESSAGE);
+						}
+					}
+					
+					else {
+						//if overdue
+						
+						JOptionPane.showMessageDialog(contentPane, "That material is not being borrowed right now!", "Error", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+				catch (Exception exception) {
+					JOptionPane.showMessageDialog(contentPane, "Please input a number", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
+			}
+			
+			
+		});
+		
+	
+
+		
 	}
 }

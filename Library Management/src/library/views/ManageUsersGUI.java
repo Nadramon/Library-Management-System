@@ -201,6 +201,51 @@ public class ManageUsersGUI {
 			}
 		});
 		
+		JButton makeLibrarianBtn = new JButton("Make Librarian");
+		makeLibrarianBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String studentIdS = JOptionPane.showInputDialog(activeFrame, "Enter the Student ID to make a Librarian", null);
+
+				try {
+					int studentId = Integer.parseInt(studentIdS);
+					
+					boolean found = false;
+					
+					for (int x = 0; x <= activeList.size() - 1; x++) {
+						if (studentId == activeList.get(x).getUcid()) {
+							found = true;
+							if(activeList.get(x).getIsLibrarian()) {
+								String msg = activeList.get(x).getFirstName() + " is already a librarian!";
+								JOptionPane.showMessageDialog(activeFrame, msg, "Error", JOptionPane.WARNING_MESSAGE);
+							}
+							else {
+								activeList.get(x).setIsLibrarian(true);
+								String msg = activeList.get(x).getFirstName() + " is now a librarian!";
+								JOptionPane.showMessageDialog(activeFrame, msg, "Success", JOptionPane.INFORMATION_MESSAGE);
+							}
+							break;
+							
+							
+						}
+					}
+					
+					if (!found) {
+						JOptionPane.showMessageDialog(activeFrame, "That UCID does not exist in the active database!", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+
+
+				}
+				catch (Exception exception) {
+					JOptionPane.showMessageDialog(activeFrame, "Please input a number", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+			
+			
+		});
+				
+		
 		
 		
 		GroupLayout groupLayout = new GroupLayout(activeFrame.getContentPane());
@@ -217,6 +262,8 @@ public class ManageUsersGUI {
 					.addComponent(switchBtn, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(moveToArchiveBtn, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+					.addComponent(makeLibrarianBtn, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
 					.addComponent(backBtn)
 					.addContainerGap())
@@ -235,6 +282,7 @@ public class ManageUsersGUI {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(switchBtn, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 						.addComponent(moveToArchiveBtn, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(makeLibrarianBtn, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 						.addComponent(backBtn))
 					.addGap(134))
 		);
