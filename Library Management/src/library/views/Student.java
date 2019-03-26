@@ -17,20 +17,24 @@ public class Student {
 	private int		ucid				= 0;
 	private int		currentBorrowing	= 0;
 	private boolean	isActive			= true;
+
     private String  username            = "";
     private byte[]  password;
     private byte[]  salt;
     private String  passwordo 			= "";
     private boolean isLibrarian			= false;
+
+
 	
 	
-	public Student(String fn, String ln, int id, int cb, boolean ia){
+	public Student(String fn, String ln, int id, int cb, boolean ia, boolean il){
 		
 		firstName 			= fn;
 		lastName			= ln;
 		ucid				= id;
 		currentBorrowing	= cb;
 		isActive			= ia;
+		isLibrarian			= il;
 	}
 	
 	public Student(String fn, String ln, int id, int cb, boolean ia, String uName, String pWord, boolean isLib) {
