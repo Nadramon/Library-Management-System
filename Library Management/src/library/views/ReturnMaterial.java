@@ -15,6 +15,10 @@ import java.awt.BorderLayout;
 
 public class ReturnMaterial {
 
+	public JFrame getFrame() {
+		return frame;
+	}
+
 	private JFrame frame;
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

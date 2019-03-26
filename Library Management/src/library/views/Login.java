@@ -100,27 +100,51 @@ public class Login extends JFrame {
         
         btnBack = new JButton("Back");
         
+        JButton btnBorrowMaterial = new JButton("Borrow material");
+        
+        JButton btnReturnMaterial = new JButton("Return Material");
+        
+        JButton btnReviewOrder = new JButton("Review Order");
+        
         
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(22)
-                    .addComponent(btnManageUsers)
-                    .addPreferredGap(ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-                    .addComponent(btnBack)
-                    .addGap(37))
+        	gl_contentPane.createParallelGroup(Alignment.LEADING)
+        		.addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
+        		.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+        			.addContainerGap(332, Short.MAX_VALUE)
+        			.addComponent(btnBack)
+        			.addGap(37))
+        		.addGroup(gl_contentPane.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+        				.addComponent(btnManageUsers, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(btnBorrowMaterial, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        			.addContainerGap(313, Short.MAX_VALUE))
+        		.addGroup(gl_contentPane.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(btnReviewOrder, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addGap(307))
+        		.addGroup(gl_contentPane.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(btnReturnMaterial)
+        			.addContainerGap(307, Short.MAX_VALUE))
         );
         gl_contentPane.setVerticalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(btnManageUsers)
-                        .addComponent(btnBack))
-                    .addContainerGap())
+        	gl_contentPane.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_contentPane.createSequentialGroup()
+        			.addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(26)
+        			.addComponent(btnManageUsers)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnBorrowMaterial)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(btnReturnMaterial)
+        			.addGap(13)
+        			.addComponent(btnReviewOrder)
+        			.addPreferredGap(ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+        			.addComponent(btnBack)
+        			.addContainerGap())
         );
         contentPane.setLayout(gl_contentPane);
         createEvents(users);

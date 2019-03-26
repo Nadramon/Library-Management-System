@@ -19,6 +19,7 @@ public class StudentView extends JFrame {
 	private JPanel contentPane;
 	private JTextField welcomeTxt;
 	private JButton btnBack;
+	private JButton btnReturnBook;
 
 	/**
 	 * Launch the application.
@@ -61,24 +62,28 @@ public class StudentView extends JFrame {
 		welcomeTxt.setText("Logged in as: " + s.getFirstName() + " " + s.getLastName() + ", current books: " + s.getCurrentBorrowing());
 		
 		btnBack = new JButton("Back");
+		
+		btnReturnBook = new JButton("Return Book");
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(welcomeTxt, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(133, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(348, Short.MAX_VALUE)
+					.addComponent(btnBack)
+					.addGap(21))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 					.addGap(246)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnSearchForMaterial, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
 						.addComponent(btnSearchForBook, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-						.addComponent(btnBorrowBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
+						.addComponent(btnBorrowBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+						.addComponent(btnReturnBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
 					.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(314, Short.MAX_VALUE)
-					.addComponent(btnBack)
-					.addGap(21))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -91,7 +96,9 @@ public class StudentView extends JFrame {
 					.addComponent(btnSearchForMaterial)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnBorrowBook)
-					.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnReturnBook)
+					.addPreferredGap(ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
 					.addComponent(btnBack)
 					.addContainerGap())
 		);
@@ -108,7 +115,12 @@ public class StudentView extends JFrame {
 				dispose();
 			}
 		});
+		btnReturnBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReturnMaterial retMat = new ReturnMaterial();
+				retMat.getFrame().setVisible(true);
+				dispose();
+				}
+		});
 	}
-	
-	
 }
