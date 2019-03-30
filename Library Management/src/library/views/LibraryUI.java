@@ -1,3 +1,5 @@
+// The main library management program UI to start
+
 package library.views;
 import java.awt.EventQueue;
 import java.awt.Window;
@@ -133,7 +135,8 @@ public class LibraryUI {
 	}
 	
 	private void createEvents() {
-        // TODO Auto-generated method stub
+        // This method logs in the user assuming they are signed up in the system
+		// Pop ups a fail login screen if they are not signed up/wrong password or username
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
             	students = new ManageUsers();
@@ -166,6 +169,7 @@ public class LibraryUI {
             }
         });
 		
+        // This switches to the Register GUi when the user presses the Register button.
 		btnNewUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Register reg = new Register();

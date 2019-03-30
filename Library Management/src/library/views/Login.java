@@ -1,3 +1,7 @@
+/**
+ * This view is what a librarian would see when they log in, It shows all the basic functionality a librarian would be able to do
+ */
+
 package library.views;
 
 import java.awt.BorderLayout;
@@ -156,8 +160,12 @@ public class Login extends JFrame {
         contentPane.setLayout(gl_contentPane);
         createEvents(users);
     }
-
+	
+	// create events
 	private void createEvents(ManageUsers users) {
+		/*
+		 * This method sets up a button in order to open the ManageUsersGUI
+		 */
 		btnManageUsers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			ArrayList<Student> archiveList = users.getArchiveList();
@@ -167,6 +175,9 @@ public class Login extends JFrame {
 			}
 		});
 		
+		/*
+		 * This method goes back to the previous menu
+		 */
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LibraryUI lib = new LibraryUI();
