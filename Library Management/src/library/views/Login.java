@@ -175,7 +175,7 @@ public class Login extends JFrame {
 			}
 		});
 		
-		
+		//For borrowing materials, when the button is clicked, dialog boxes will pop up to inquire for IDs
 		btnBorrowMaterial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -194,7 +194,14 @@ public class Login extends JFrame {
 						
 						//first: check if student has less than 5 borrowings
 						//find student by id in save file, check borrowings value
-						
+						for (int x = 0; x < users.getActiveList().size(); x++) {
+							if (users.getActiveList().get(x).getUcid() == studentId) {
+								if (5 <= users.getActiveList().get(x).getCurrentBorrowing()) {
+									success = false;
+								}
+								break;
+							}
+						}
 						//if studentBorrow < 5: success
 						//else dont allow
 						if(success) {
@@ -224,7 +231,7 @@ public class Login extends JFrame {
 		});
 		
 		
-		
+		//The button for returning materials, when clicked will inquire user to input ID
 		btnReturnMaterial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String idS = JOptionPane.showInputDialog(contentPane, "Enter the Material ID to return:", null);
@@ -237,6 +244,7 @@ public class Login extends JFrame {
 					
 					if(success) {
 						
+						//For working with dates formats
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						Date borrowDate = sdf.parse("2019-01-10");
 						

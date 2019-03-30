@@ -148,13 +148,16 @@ public class ManageUsersGUI {
 					
 					if (success) {
 						
+						//delete all rows except header
 						for (int x=0; x < activeList.size(); x++) {
 							dataActive.removeRow(1);
 						}
 
+						//remove the student from active and add to archive
 						archiveList.add(activeList.get(index));
 						activeList.remove(activeList.get(index));
 						
+						//put every active dstudent on the table
 						for (int x = 0; x <= activeList.size() - 1; x++) {
 							dataActive.addRow(new Object[] {activeList.get(x).getUcid(), activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getCurrentBorrowing()});
 						}
@@ -191,6 +194,8 @@ public class ManageUsersGUI {
 			}
 		});
 		
+		
+		//button for switching to the archived trable
 		JButton switchBtn = new JButton("Switch Table");
 		switchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -201,6 +206,8 @@ public class ManageUsersGUI {
 			}
 		});
 		
+		
+		//button for making a student a librarian
 		JButton makeLibrarianBtn = new JButton("Make Librarian");
 		makeLibrarianBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -215,10 +222,12 @@ public class ManageUsersGUI {
 					for (int x = 0; x <= activeList.size() - 1; x++) {
 						if (studentId == activeList.get(x).getUcid()) {
 							found = true;
+							//if the student is already a librarian
 							if(activeList.get(x).getIsLibrarian()) {
 								String msg = activeList.get(x).getFirstName() + " is already a librarian!";
 								JOptionPane.showMessageDialog(activeFrame, msg, "Error", JOptionPane.WARNING_MESSAGE);
 							}
+							//success
 							else {
 								activeList.get(x).setIsLibrarian(true);
 								String msg = activeList.get(x).getFirstName() + " is now a librarian!";
@@ -230,12 +239,14 @@ public class ManageUsersGUI {
 						}
 					}
 					
+					//if the ID is not in the database
 					if (!found) {
 						JOptionPane.showMessageDialog(activeFrame, "That UCID does not exist in the active database!", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 
 				}
+				//if the user didnt input an integer
 				catch (Exception exception) {
 					JOptionPane.showMessageDialog(activeFrame, "Please input a number", "Error", JOptionPane.ERROR_MESSAGE);
 				}
@@ -246,7 +257,7 @@ public class ManageUsersGUI {
 		});
 				
 		
-		
+		//layout for the GUI for all the buttons and tables and labels
 		
 		GroupLayout groupLayout = new GroupLayout(activeFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -322,6 +333,8 @@ public class ManageUsersGUI {
 		
 		moveToActiveBtn = new JButton("Move to Active");
 		
+		//button for moving students to the active tables
+		
 		
 		moveToActiveBtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -347,13 +360,16 @@ public class ManageUsersGUI {
 					}
 					
 					if (success) {
+						//delete every row in the table except the headers
 						for (int x=0; x < archiveList.size(); x++) {
 							dataArchive.removeRow(1);
 						}
 						
+						//remove the student from archive and add to the active
 						activeList.add(archiveList.get(index));
 						archiveList.remove(archiveList.get(index));
 						
+						//add all the archived students back on the table
 						for (int x = 0; x <= archiveList.size() - 1; x++) {
 							dataArchive.addRow(new Object[] {archiveList.get(x).getUcid(), archiveList.get(x).getFirstName(), archiveList.get(x).getLastName(), archiveList.get(x).getCurrentBorrowing()});
 						}				
@@ -377,7 +393,7 @@ public class ManageUsersGUI {
 			
 		});
 		
-		
+		//button for going to the previous GUI
 		JButton backBtn = new JButton("Back");
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -389,7 +405,7 @@ public class ManageUsersGUI {
 			}
 		});
 		
-		
+		//button for switching to the active table
 		JButton switchBtn = new JButton("Switch Table");
 		switchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -400,6 +416,7 @@ public class ManageUsersGUI {
 			}
 		});
 		
+		//layout for the GUI, including buttons, labesl and tables
 		
 		GroupLayout groupLayout = new GroupLayout(archivedFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
