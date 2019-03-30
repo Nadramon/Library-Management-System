@@ -1,3 +1,5 @@
+// This class is the GUI for if an ARchived account is trying to log in
+
 package library.views;
 
 import java.awt.BorderLayout;

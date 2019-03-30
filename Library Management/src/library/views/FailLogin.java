@@ -1,3 +1,5 @@
+// A pop up that appears when a login has failed
+
 package library.views;
 
 import java.awt.BorderLayout;

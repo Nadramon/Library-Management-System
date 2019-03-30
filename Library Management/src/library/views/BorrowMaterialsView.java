@@ -1,3 +1,5 @@
+// This is the window to Borrow Materials, It pop ups a search so users can search for books/materials
+
 package library.views;
 
 import java.awt.BorderLayout;
@@ -121,6 +123,7 @@ public class BorrowMaterialsView extends JFrame {
 	}
 
 	private void createEvents() {
+		// The search button searches for the items based on categories of search and name
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String typeOfSearch = (String) comboBox_BM.getSelectedItem();

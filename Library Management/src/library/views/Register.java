@@ -1,3 +1,4 @@
+
 package library.views;
 
 import java.awt.BorderLayout;
@@ -16,6 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 
+/**
+ * 
+ * This UI lets the user register into the system.
+ */
 public class Register extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -133,7 +138,10 @@ public class Register extends JDialog {
 		createEvents();
 	}
 
+	// Method to create events
 	private void createEvents() {
+		// This method takes all the inputs the user has inputted and creates a new student and stores them. Which allows the user to be 
+		// signed up.
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -165,6 +173,12 @@ public class Register extends JDialog {
 		
 	}
 	
+	/**
+	 * This method checks if a password the user has entered in is weak or not.
+	 * It has to be length >=8, Atleast one capital,lowercase,number and special symbol
+	 * @param pWord ( The password the user typed in)
+	 * @return true or false depending if the password is strong or weak
+	 */
 	public static boolean isStrong(String pWord) {
         boolean strongPword = false;
         if (pWord.length() >= 8) {

@@ -1,3 +1,5 @@
+// This view is when a student logs in, They get to see the functionality that a student would be able to use
+
 package library.views;
 
 import java.awt.BorderLayout;
@@ -107,7 +109,7 @@ public class StudentView extends JFrame {
 	}
 
 	private void createEvents() {
-		// TODO Auto-generated method stub
+		// This button goes back to the previous menu
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LibraryUI lib = new LibraryUI();
@@ -115,6 +117,7 @@ public class StudentView extends JFrame {
 				dispose();
 			}
 		});
+		// This button lets the user return materials
 		btnReturnBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ReturnMaterial retMat = new ReturnMaterial();

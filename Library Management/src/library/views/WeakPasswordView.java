@@ -1,3 +1,5 @@
+// This pop up tells the users that their password is weak and what is needed in a password to register.
+
 package library.views;
 
 import java.awt.BorderLayout;
