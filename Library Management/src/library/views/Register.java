@@ -1,3 +1,4 @@
+
 package library.views;
 
 import java.awt.BorderLayout;
@@ -16,6 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 
+/**
+ * 
+ * This UI lets the user register into the system.
+ */
 public class Register extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -24,7 +29,8 @@ public class Register extends JDialog {
 	private JTextField lastName;
 	private JTextField iD;
 	private ManageUsers students;
-	private JTextField tee;
+	private JTextField userName;
+	private JTextField passWord;
 
 	/**
 	 * Launch the application.
@@ -64,9 +70,16 @@ public class Register extends JDialog {
 		
 		JLabel lblUcid = new JLabel("UCID");
 		
-		tee = new JTextField();
+		userName = new JTextField();
 	
-		tee.setColumns(10);
+		userName.setColumns(10);
+		
+		passWord = new JTextField();
+		passWord.setColumns(10);
+		
+		JLabel lblUsername = new JLabel("Username");
+		
+		JLabel lblPassword = new JLabel("Password");
 		
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
@@ -78,13 +91,17 @@ public class Register extends JDialog {
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGap(34)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblFirstName)
 						.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 							.addComponent(lblUcid)
-							.addComponent(lblLastName)))
+							.addComponent(lblLastName))
+						.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+							.addComponent(lblUsername)
+							.addComponent(lblFirstName)
+							.addComponent(lblPassword)))
 					.addGap(54)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(tee, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(passWord, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(userName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(iD, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(firstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -93,7 +110,15 @@ public class Register extends JDialog {
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addGap(38)
+					.addGap(21)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(userName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblUsername))
+					.addGap(18)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(passWord, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblPassword))
+					.addPreferredGap(ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(firstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblFirstName))
@@ -105,9 +130,7 @@ public class Register extends JDialog {
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(iD, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblUcid))
-					.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-					.addComponent(tee, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(24)
+					.addGap(17)
 					.addComponent(btnConfirm)
 					.addContainerGap())
 		);
@@ -115,22 +138,60 @@ public class Register extends JDialog {
 		createEvents();
 	}
 
+	// Method to create events
 	private void createEvents() {
+		// This method takes all the inputs the user has inputted and creates a new student and stores them. Which allows the user to be 
+		// signed up.
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				students = new ManageUsers();
 				ArrayList<Student> stu = students.getActiveList();
+				String uName = userName.getText();
+				String pWord = passWord.getText();
 				String fName = firstName.getText();
 				String lName = lastName.getText();	
 				String uc = iD.getText();
 				int ucid = Integer.parseInt(uc);
-				Student ins = new Student(fName, lName, ucid, 0, true);
+
+				if (isStrong(pWord) == true) {
+					Student ins = new Student(fName, lName, ucid, 0, true, uName, pWord, false);
+					stu.add(ins);	
+					dispose();
+				}else {
+					WeakPasswordView lol = new WeakPasswordView();
+					lol.setVisible(true);
+					
+				}
+
+				Student ins = new Student(fName, lName, ucid, 0, true, false);
 				stu.add(ins);	
 				dispose();
+
 			}
 		});
 		
 	}
-
+	
+	/**
+	 * This method checks if a password the user has entered in is weak or not.
+	 * It has to be length >=8, Atleast one capital,lowercase,number and special symbol
+	 * @param pWord ( The password the user typed in)
+	 * @return true or false depending if the password is strong or weak
+	 */
+	public static boolean isStrong(String pWord) {
+        boolean strongPword = false;
+        if (pWord.length() >= 8) {
+            if (pWord.matches(".*\\d+.*")){
+                if (pWord.matches(".*[a-z]+.*")) {
+                    if (pWord.matches(".*[A-Z]+.*")) {
+                        if (!pWord.contains("\\s")) {
+                            strongPword = true;
+                        }
+                    }
+                }
+            }
+        }
+        return strongPword;
+    }
 }
