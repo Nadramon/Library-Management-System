@@ -56,8 +56,12 @@ public class LibraryUI {
 	 * Create the application.
 	 */
 	public LibraryUI() {
-		Student ins = new Student("Admin", "", 01, 0, true, "admin", "admin", true);
+		Student ins = new Student("Admin", "", 1, 0, true, "admin", "admin", true);
 		students.getActiveList().add(ins);
+		Book harry = new Book("Book", "Harry Potter", "Rowling", false, 0);
+		students.getMaterialList().add(harry);
+		Material chair = new Material("Chair", "IKEA-261", true, 1);
+		students.getMaterialList().add(chair);
 		initialize();
 		createEvents();
 	}
