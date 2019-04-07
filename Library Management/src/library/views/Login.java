@@ -181,6 +181,7 @@ public class Login extends JFrame {
 				
 				String materialIdS = JOptionPane.showInputDialog(contentPane, "Enter the Material ID to lend:", null);
 				String studentIdS = JOptionPane.showInputDialog(contentPane, "Enter the Student ID it is for:", null);
+				int studentIndex = 999;
 				boolean success = false;
 				try {
 					int materialId = Integer.parseInt(materialIdS);
@@ -188,7 +189,17 @@ public class Login extends JFrame {
 					
 					//for loop to iterate to check if exists or not
 					//loop through available save file
-					success = true;
+					
+					for (int z = 0; z < users.getMaterialList().size(); z++) {
+						if (users.getMaterialList().get(z).getID() == materialId) {
+							if (!users.getMaterialList().get(z).isAReferenceMaterial()) {
+								if (users.getMaterialList().get(z).getCountAvailable() > 0) {
+									success = true;
+									break;
+								}
+							}
+						}
+					}
 					
 					if(success) {
 						
@@ -196,15 +207,43 @@ public class Login extends JFrame {
 						//find student by id in save file, check borrowings value
 						for (int x = 0; x < users.getActiveList().size(); x++) {
 							if (users.getActiveList().get(x).getUcid() == studentId) {
+								studentIndex = x;
 								if (5 <= users.getActiveList().get(x).getCurrentBorrowing()) {
 									success = false;
 								}
 								break;
 							}
 						}
-						//if studentBorrow < 5: success
-						//else dont allow
+						
+						System.out.println("pass student check");
+						
+						//check if available in library
 						if(success) {
+							
+							users.getMaterialList().get(materialId).setCountAvailable(-1);
+							//For working with dates formats
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+							
+							//calculate the deadline date
+							Date currentDate = new Date();
+							Calendar calendar = Calendar.getInstance();
+							calendar.setTime(currentDate);
+							calendar.add(Calendar.DATE, 14);
+							Date deadline = sdf.parse(sdf.format(calendar.getTime()));
+							
+							System.out.println("date shit");
+							
+							Borrowings borrowerData = new Borrowings(studentId, materialId, deadline);
+							users.getBorrowingList().add(borrowerData);
+							System.out.println("borrowing class");
+							users.getActiveList().get(studentIndex).setCurrentBorrowing(1);
+							System.out.println("set student borrow");
+							String msg = users.getMaterialList().get(materialId).getName() + " has been lent out to " + users.getActiveList().get(studentIndex).getFirstName();
+							System.out.println("calc mesg");
+							JOptionPane.showMessageDialog(contentPane, msg, "Info", JOptionPane.INFORMATION_MESSAGE);
+							
+							System.out.println("finit");
+							
 							
 						}
 						
@@ -218,7 +257,7 @@ public class Login extends JFrame {
 					
 					else {
 						
-						JOptionPane.showMessageDialog(contentPane, "That material is not available right now!", "Error", JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(contentPane, "That material does not exist, or is a reference, or is not available at the moment!", "Error", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 				catch (Exception exception) {

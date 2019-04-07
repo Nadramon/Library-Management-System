@@ -96,8 +96,8 @@ public class Student {
 	}
 
 
-	public void setCurrentBorrowing(int currentBorrowing) {
-		this.currentBorrowing = currentBorrowing;
+	public void setCurrentBorrowing(int i) {
+		this.currentBorrowing += i;
 	}
 
 
