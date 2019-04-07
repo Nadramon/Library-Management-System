@@ -22,6 +22,7 @@ public class StudentView extends JFrame {
 	private JTextField welcomeTxt;
 	private JButton btnBack;
 	private JButton btnReturnBook;
+	private JButton btnSearchForBook;
 
 	/**
 	 * Launch the application.
@@ -49,13 +50,7 @@ public class StudentView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnSearchForBook = new JButton("Search for Book");
-		
-		JButton btnSearchForMaterial = new JButton("Search/Order for Material");
-		btnSearchForMaterial.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnSearchForBook = new JButton("Search for Book/Material");
 		
 		JButton btnBorrowBook = new JButton("Borrow Book");
 		
@@ -69,7 +64,7 @@ public class StudentView extends JFrame {
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(welcomeTxt, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
@@ -78,13 +73,17 @@ public class StudentView extends JFrame {
 					.addContainerGap(348, Short.MAX_VALUE)
 					.addComponent(btnBack)
 					.addGap(21))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addGap(246)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnSearchForMaterial, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-						.addComponent(btnSearchForBook, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-						.addComponent(btnBorrowBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-						.addComponent(btnReturnBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
+					.addComponent(btnSearchForBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(246)
+					.addComponent(btnBorrowBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(246)
+					.addComponent(btnReturnBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -94,13 +93,11 @@ public class StudentView extends JFrame {
 					.addComponent(welcomeTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnSearchForBook)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnSearchForMaterial)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(18)
 					.addComponent(btnBorrowBook)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnReturnBook)
-					.addPreferredGap(ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
 					.addComponent(btnBack)
 					.addContainerGap())
 		);
@@ -124,6 +121,13 @@ public class StudentView extends JFrame {
 				retMat.getFrame().setVisible(true);
 				dispose();
 				}
+		});
+		
+		btnSearchForBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BorrowMaterialsView search = new BorrowMaterialsView();
+				search.setVisible(true);
+			}
 		});
 	}
 }

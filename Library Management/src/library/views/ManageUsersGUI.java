@@ -397,8 +397,10 @@ public class ManageUsersGUI {
 		JButton backBtn = new JButton("Back");
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login log = new Login(user);
-				log.setVisible(true);
+				//Login log = new Login(user);
+				//log.setVisible(true);
+				LibraryUI temp = new LibraryUI();
+				temp.getFrame().setVisible(true);
 				activeFrame.dispose();
 				archivedFrame.dispose();
 				
