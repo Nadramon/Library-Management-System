@@ -284,45 +284,58 @@ public class Login extends JFrame {
 		//The button for returning materials, when clicked will inquire user to input ID
 		btnReturnMaterial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String idS = JOptionPane.showInputDialog(contentPane, "Enter the Material ID to return:", null);
+				String materialIdS = JOptionPane.showInputDialog(contentPane, "Enter the Material ID to lend:", null);
+				String studentIdS = JOptionPane.showInputDialog(contentPane, "Enter the Student ID it is for:", null);
+				int studentIndex = 999;
 				boolean success = false;
 				try {
-					int id = Integer.parseInt(idS);
+					int materialId = Integer.parseInt(materialIdS);
+					int studentId = Integer.parseInt(studentIdS);
+					Date deadline = new Date();
+					Date currentDate = new Date();
+					String msg = "";
 					
-					//for loop to iterate to check if exists or not
-					success = true;
+					//getting rid of it from student
 					
-					if(success) {
-						
-						//For working with dates formats
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-						Date borrowDate = sdf.parse("2019-01-10");
-						
-						Date currentDate = new Date();
-						Calendar calendar = Calendar.getInstance();
-						calendar.setTime(borrowDate);
-						calendar.add(Calendar.DATE, 14);
-						Date deadline = sdf.parse(sdf.format(calendar.getTime()));
-						
-						//getting rid of it from student
-						
-						//String text2 = material.get(1) + " has been returned!";
-						String text2 = "bananas";
-						JOptionPane.showMessageDialog(contentPane, text2, "Status", JOptionPane.INFORMATION_MESSAGE);
-						
-						//success message
-						
-						if(currentDate.after(deadline)) {
-							String text = "The material was overdue.\nCurrent Date: " + currentDate.toString() + "\nDue Date: " + deadline.toString();
-							JOptionPane.showMessageDialog(contentPane, text, "Error", JOptionPane.WARNING_MESSAGE);
+					for (int x = 0; x < users.getBorrowingList().size(); x++) {
+						if (users.getBorrowingList().get(x).getMaterialId() == materialId) {
+							if (users.getBorrowingList().get(x).getStudentId() == studentId) {
+								deadline = users.getBorrowingList().get(x).getDue();
+								
+								users.getMaterialList().get(materialId).setCountAvailable(1);
+								for (int y = 0; y < users.getActiveList().size(); x++) {
+									if (users.getActiveList().get(y).getUcid() == studentId) {
+										users.getActiveList().get(y).setCurrentBorrowing(-1);
+										break;
+									}
+								}
+								msg = 	users.getMaterialList().get(materialId).getName() + " has been returned!";	
+								success = true;
+								
+								users.getBorrowingList().remove(x);
+								break;
+									
+							}
 						}
 					}
 					
+					if (success) {
+						JOptionPane.showMessageDialog(contentPane, msg, "Info", JOptionPane.INFORMATION_MESSAGE);
+					}
+
+
+					
 					else {
-						//if overdue
 						
 						JOptionPane.showMessageDialog(contentPane, "That material is not being borrowed right now!", "Error", JOptionPane.WARNING_MESSAGE);
 					}
+					
+					
+					if(currentDate.after(deadline)) {
+						String text = "The material was overdue.\nCurrent Date: " + currentDate.toString() + "\nDue Date: " + deadline.toString();
+						JOptionPane.showMessageDialog(contentPane, text, "Error", JOptionPane.WARNING_MESSAGE);
+					}
+					
 				}
 				catch (Exception exception) {
 					JOptionPane.showMessageDialog(contentPane, "Please input a number", "Error", JOptionPane.ERROR_MESSAGE);
