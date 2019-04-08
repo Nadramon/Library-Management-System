@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class StudentView extends JFrame {
@@ -23,7 +24,8 @@ public class StudentView extends JFrame {
 	private JButton btnBack;
 	private JButton btnReturnBook;
 	private JButton btnSearchForBook;
-
+	private JButton btnOrderMaterials;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -61,10 +63,12 @@ public class StudentView extends JFrame {
 		btnBack = new JButton("Back");
 		
 		btnReturnBook = new JButton("Return Book");
+		
+		btnOrderMaterials = new JButton("Order Materials");
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(welcomeTxt, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
@@ -73,17 +77,19 @@ public class StudentView extends JFrame {
 					.addContainerGap(348, Short.MAX_VALUE)
 					.addComponent(btnBack)
 					.addGap(21))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGap(246)
-					.addComponent(btnSearchForBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-					.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(246)
 					.addComponent(btnBorrowBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
 					.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(246)
-					.addComponent(btnReturnBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+					.addComponent(btnSearchForBook, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(246)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnOrderMaterials, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+						.addComponent(btnReturnBook, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -91,13 +97,15 @@ public class StudentView extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(welcomeTxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addGap(25)
 					.addComponent(btnSearchForBook)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnBorrowBook)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnReturnBook)
-					.addPreferredGap(ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnOrderMaterials)
+					.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
 					.addComponent(btnBack)
 					.addContainerGap())
 		);
@@ -122,11 +130,26 @@ public class StudentView extends JFrame {
 				dispose();
 				}
 		});
-		
+		/*
+		 * This button lets you go to the search window to search for an item.
+		 */
 		btnSearchForBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BorrowMaterialsView search = new BorrowMaterialsView();
 				search.setVisible(true);
+			}
+		});
+		/*
+		 * This button switches to the order material form in order to place an order.
+		 */
+		btnOrderMaterials.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				OrderMaterialsView order = new OrderMaterialsView();
+//				order.setVisible(true);
+				ArrayList<Material> materialList = new ArrayList<Material>();
+
+				MaterialsItemsDisplay list = new MaterialsItemsDisplay(materialList);
+				list.setVisible(true);
 			}
 		});
 	}

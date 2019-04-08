@@ -12,6 +12,8 @@ public class Main {
 		students.getMaterialList().add(harry);
 		Material chair = new Material("Chair", "IKEA-261", true, 1);
 		students.getMaterialList().add(chair);
+		Material chair2 = new Material("Chair", "IKEA-2a1", true, 1);
+		students.getMaterialList().add(chair2);
 		LibraryUI lol = new LibraryUI();
 		lol.getFrame().setVisible(true);
 
