@@ -12,8 +12,14 @@ public class Main {
 		students.getMaterialList().add(harry);
 		Material chair = new Material("Chair", "IKEA-261", true, 1);
 		students.getMaterialList().add(chair);
-		Material chair2 = new Material("Chair", "IKEA-2a1", true, 1);
+		Material chair2 = new Material("Chair", "IKEA-2a1", true, 2);
 		students.getMaterialList().add(chair2);
+		Book percy = new Book("Book", "Percy Jackson", "Riordan", false, 3);
+		students.getMaterialList().add(percy);
+		Book ref = new Book("Book", "Maps of Africa", "Zinetti", true, 4);
+		students.getMaterialList().add(ref);
+		Material lap = new Material("Laptop", "Chromebook", true, 5);
+		students.getMaterialList().add(lap);
 		LibraryUI lol = new LibraryUI();
 		lol.getFrame().setVisible(true);
 

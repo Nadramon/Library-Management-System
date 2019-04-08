@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class BorrowMaterialsView extends JFrame {
 	 * Create the frame.
 	 */
 	public BorrowMaterialsView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 188);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -133,6 +134,9 @@ public class BorrowMaterialsView extends JFrame {
 				ArrayList<Material> materialList = new ArrayList<Material>();
 				if (typeOfSearch == "Books" && typeOfMaterial == "Author") {
 					lblTestlabel.setText("It works");
+				}
+				else if (typeOfSearch == "Materials" && typeOfMaterial == "Author") {
+					JOptionPane.showMessageDialog(contentPane, "That combination is not possible", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
