@@ -1,0 +1,42 @@
+<activeList>
+	<student>
+		<ucid>1001</ucid>
+		<firstName>John</firstName>
+		<lastName>Smith</lastName>
+		<currentBorrowing>0</currentBorrowing>
+		<isActive>true</isActive>
+		<username>Admin</username>
+		<Password>a</Password>
+		<isLibrarian>true</isLibrarian>
+	</student>
+	<student>
+		<ucid>1002</ucid>
+		<firstName>Hermione</firstName>
+		<lastName>Granger</lastName>
+		<currentBorrowing>5</currentBorrowing>
+		<isActive>true</isActive>
+		<username>Hermione Granger</username>
+		<Password>Muggleborns4SPEW</Password>
+		<isLibrarian>false</isLibrarian>
+	</student>
+	<student>
+		<ucid>1003</ucid>
+		<firstName>Darth</firstName>
+		<lastName>Vader</lastName>
+		<currentBorrowing>1</currentBorrowing>
+		<isActive>true</isActive>
+		<username>Darth Vader</username>
+		<Password>ILuvPadme66</Password>
+		<isLibrarian>false</isLibrarian>
+	</student>
+	<student>
+		<ucid>1004</ucid>
+		<firstName>Steve</firstName>
+		<lastName>Rogers</lastName>
+		<currentBorrowing>4</currentBorrowing>
+		<isActive>true</isActive>
+		<username>Steve Rogers</username>
+		<Password>ABCabc123</Password>
+		<isLibrarian>false</isLibrarian>
+	</student>
+</activeList>
