@@ -56,12 +56,6 @@ public class LibraryUI {
 	 * Create the application.
 	 */
 	public LibraryUI() {
-		Student ins = new Student("Admin", "", 1, 0, true, "admin", "admin", true);
-		students.getActiveList().add(ins);
-		Book harry = new Book("Book", "Harry Potter", "Rowling", false, 0);
-		students.getMaterialList().add(harry);
-		Material chair = new Material("Chair", "IKEA-261", true, 1);
-		students.getMaterialList().add(chair);
 		initialize();
 		createEvents();
 	}
@@ -145,9 +139,16 @@ public class LibraryUI {
             public void actionPerformed(ActionEvent e) { 
             	students = new ManageUsers();
                 ArrayList<Student> stu = students.getActiveList();
+                ArrayList<Student> studentArchive = students.getArchiveList();
                 String user = username.getText();
                 String pass = password.getText();
                 boolean loggy = false ;
+                for (int x = 0; x < studentArchive.size(); x++) {
+                	if (studentArchive.get(x).isActive() == false) {
+                		ArchivedAccountView archAccount = new ArchivedAccountView();
+                		archAccount.setVisible(true);
+                	}
+                }
                 for(int x = 0; x < stu.size(); x++) {
                     if (stu.get(x).getUsername().equals(user)) {
                         if(stu.get(x).getPassword().equals(pass)) {
