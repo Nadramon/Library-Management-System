@@ -49,10 +49,8 @@ public class Material {
      * @param totalInLibrary the totalInLibrary to set
      */
     public void addItems(int increaseAmount) {
-        if (increaseAmount > 0) {
             totalInLibrary += increaseAmount;
             countAvailable += increaseAmount;
-        }
     }
     
     

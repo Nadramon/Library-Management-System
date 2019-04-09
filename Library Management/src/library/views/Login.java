@@ -29,6 +29,7 @@ public class Login extends JFrame {
 	private JTextField txtSuccessfulLogin;
 	private JButton btnManageUsers;
 	private JButton btnBack;
+	private JButton	btnManageMaterials;
     private JButton btnBorrowMaterial; 
     private JButton btnReturnMaterial;
     private JButton btnReviewOrder;
@@ -68,7 +69,9 @@ public class Login extends JFrame {
         
         btnBack = new JButton("Back");
         
-        btnBorrowMaterial = new JButton("Borrow material");
+        btnManageMaterials = new JButton("Manage Materials");
+        
+        btnBorrowMaterial = new JButton("Borrow Material");
         
         btnReturnMaterial = new JButton("Return Material");
         
@@ -87,6 +90,7 @@ public class Login extends JFrame {
         			.addContainerGap()
         			.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
         				.addComponent(btnManageUsers, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(btnManageMaterials, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         				.addComponent(btnBorrowMaterial, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         			.addContainerGap(313, Short.MAX_VALUE))
         		.addGroup(gl_contentPane.createSequentialGroup()
@@ -104,6 +108,8 @@ public class Login extends JFrame {
         			.addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addGap(26)
         			.addComponent(btnManageUsers)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnManageMaterials)
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(btnBorrowMaterial)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -129,6 +135,13 @@ public class Login extends JFrame {
 			ArrayList<Student> archiveList = users.getArchiveList();
 			ArrayList<Student> activeList = users.getActiveList();
 			ManageUsersGUI manageUsers = new ManageUsersGUI(activeList, archiveList, stu);
+			dispose();
+			}
+		});
+		
+		btnManageMaterials.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			ManageMaterialsView manageUsers = new ManageMaterialsView(stu);
 			dispose();
 			}
 		});

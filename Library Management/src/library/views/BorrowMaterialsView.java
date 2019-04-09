@@ -122,9 +122,29 @@ public class BorrowMaterialsView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String typeOfSearch = (String) comboBox_BM.getSelectedItem();
 				String typeOfMaterial = (String) comboBox_Aut.getSelectedItem();
-				MaterialsItemsDisplay list = new MaterialsItemsDisplay(user.getMaterialList());
-				ArrayList<Material> materialList = user.getMaterialList();
+				ArrayList<Material> materialList = new ArrayList<Material>();
 				
+				if (typeOfSearch == "Books") {
+					
+					for (int y = 0; y < user.getMaterialList().size(); y++) {
+						if (user.getMaterialList().get(y).getType() == "Book") {
+							System.out.println(y);
+							materialList.add(user.getMaterialList().get(y));
+						}
+					}
+				}
+				else {
+					materialList = user.getMaterialList();
+				}
+				
+				
+				if (typeOfMaterial == "Name") {
+					materialList = rearrangeList(materialList);
+				}
+				
+				
+				
+				MaterialsItemsDisplay list = new MaterialsItemsDisplay(materialList);
 				if (typeOfSearch == "Books" && typeOfMaterial == "Author") {
 					 for (int x = 0; x < user.getMaterialList().size(); x++) {
 						 if(materialList.get(x).getType() == "Book"){
@@ -166,6 +186,30 @@ public class BorrowMaterialsView extends JFrame {
 				
 			}
 		});
+	}
+	
+	private ArrayList<Material> rearrangeList(ArrayList<Material> listToSort) {
+
+		int size = listToSort.size();
+		boolean swapped = true;
+		while (swapped) {
+			swapped = false;
+			for (int x = 0; x < size-1; x++) {
+
+				if (listToSort.get(x).getName().compareTo(listToSort.get(x+1).getName()) > 0) {
+					Material temp = listToSort.get(x+1);
+					listToSort.set(x+1, listToSort.get(x));
+					listToSort.set(x, temp);
+					swapped = true;
+				}
+					
+					
+			}
+		}
+		
+		return listToSort;
+				
+		
 	}
 	
 }
