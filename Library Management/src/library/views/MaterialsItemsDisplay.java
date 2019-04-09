@@ -16,7 +16,7 @@ public class MaterialsItemsDisplay extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private ArrayList<Material> materialList = new ArrayList<Material>();
+
 	private DefaultTableModel mats;
 
 	/**
@@ -38,7 +38,7 @@ public class MaterialsItemsDisplay extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MaterialsItemsDisplay(ArrayList<Material> materials) {
+	public MaterialsItemsDisplay(ArrayList<Material> materialList) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -74,5 +74,30 @@ public class MaterialsItemsDisplay extends JFrame {
 					.addContainerGap(91, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	private ArrayList<Material> rearrangeList(int choice) {
+
+		ArrayList<Material> listToSort = ManageUsers.getMaterialList();
+		int size = listToSort.size();
+		boolean swapped = true;
+		while (swapped) {
+			swapped = false;
+			for (int x = 0; x < size-1; x++) {
+
+				if (listToSort.get(x).getName().compareTo(listToSort.get(x+1).getName()) > 0) {
+					Material temp = listToSort.get(x+1);
+					listToSort.set(x+1, listToSort.get(x));
+					listToSort.set(x, temp);
+					swapped = true;
+				}
+					
+					
+			}
+		}
+		
+		return listToSort;
+				
+		
 	}
 }
