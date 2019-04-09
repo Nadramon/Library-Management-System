@@ -16,7 +16,6 @@ public class MaterialsItemsDisplay extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private ArrayList<Material> materialList = new ArrayList<Material>();
 	private DefaultTableModel mats;
 
 	/**
@@ -38,7 +37,7 @@ public class MaterialsItemsDisplay extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MaterialsItemsDisplay(ArrayList<Material> materials) {
+	public MaterialsItemsDisplay(ArrayList<Material> materialList) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

@@ -32,7 +32,6 @@ public class BorrowMaterialsView extends JFrame {
 	private JLabel lblBy;
 	private JComboBox comboBox_Aut;
 	private JLabel lblSearchThe;
-	private JLabel lblTestlabel;
 	
 	/**
 	 * Launch the application.
@@ -41,8 +40,8 @@ public class BorrowMaterialsView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BorrowMaterialsView frame = new BorrowMaterialsView();
-					frame.setVisible(true);
+					//BorrowMaterialsView frame = new BorrowMaterialsView();
+				//	frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,7 +52,7 @@ public class BorrowMaterialsView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BorrowMaterialsView() {
+	public BorrowMaterialsView(ManageUsers user) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 188);
 		contentPane = new JPanel();
@@ -76,31 +75,24 @@ public class BorrowMaterialsView extends JFrame {
 		comboBox_Aut.setModel(new DefaultComboBoxModel(new String[] {"Author", "Name", "ID"}));
 		
 		lblSearchThe = new JLabel("Search the");
-		
-		lblTestlabel = new JLabel("testLabel");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(26)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(26)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(btnSearch))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblSearchThe)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(comboBox_BM, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-									.addGap(10)
-									.addComponent(lblBy)
-									.addGap(18)
-									.addComponent(comboBox_Aut, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))))
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnSearch))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(102)
-							.addComponent(lblTestlabel)))
+							.addComponent(lblSearchThe)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(comboBox_BM, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(lblBy)
+							.addGap(18)
+							.addComponent(comboBox_Aut, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(121, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -116,28 +108,62 @@ public class BorrowMaterialsView extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnSearch))
-					.addGap(18)
-					.addComponent(lblTestlabel)
-					.addContainerGap(22, Short.MAX_VALUE))
+					.addContainerGap(54, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
-		createEvents();
+		createEvents(user);
 	}
 
-	private void createEvents() {
+	private void createEvents(ManageUsers user) {
 		// The search button searches for the items based on categories of search and name
+		// If The item exists in the list then it opens a window with the list
+		// If the item doesn't exist  a popup appears
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String typeOfSearch = (String) comboBox_BM.getSelectedItem();
 				String typeOfMaterial = (String) comboBox_Aut.getSelectedItem();
-				ManageUsers lists = new ManageUsers();
-				ArrayList<Material> materialList = new ArrayList<Material>();
+				MaterialsItemsDisplay list = new MaterialsItemsDisplay(user.getMaterialList());
+				ArrayList<Material> materialList = user.getMaterialList();
+				
 				if (typeOfSearch == "Books" && typeOfMaterial == "Author") {
-					lblTestlabel.setText("It works");
+					 for (int x = 0; x < user.getMaterialList().size(); x++) {
+						 if(materialList.get(x).getType() == "Book"){
+							 list.setVisible(true);
+						 }
+					 }
 				}
 				else if (typeOfSearch == "Materials" && typeOfMaterial == "Author") {
 					JOptionPane.showMessageDialog(contentPane, "That combination is not possible", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+				else if (typeOfSearch == "Books" && typeOfMaterial == "Name") {
+					for (int x = 0; x < user.getMaterialList().size(); x++) {
+						 if(materialList.get(x).getType() == "Book"){
+							 list.setVisible(true);
+						 }
+					 }
+				}
+				else if (typeOfSearch == "Books" && typeOfMaterial == "ID") {
+					for (int x = 0; x < user.getMaterialList().size(); x++) {
+						 if(materialList.get(x).getType() == "Book"){
+							 list.setVisible(true);
+						 }
+					 }
+				}
+				else if (typeOfSearch == "Materials" && typeOfMaterial == "Name") {
+					for (int x = 0; x < user.getMaterialList().size(); x++) {
+						 if(materialList.get(x).getType() == "Book"){
+							 list.setVisible(true);
+						 }
+					 }
+				}
+				else if (typeOfSearch == "Materials" && typeOfMaterial == "ID") {
+					for (int x = 0; x < user.getMaterialList().size(); x++) {
+						 if(materialList.get(x).getType() == "Book"){
+							 list.setVisible(true);
+						 }
+					 }
+				}
+				
 			}
 		});
 	}
