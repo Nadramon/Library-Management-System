@@ -110,10 +110,10 @@ public class StudentView extends JFrame {
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
-		createEvents();
+		createEvents(users);
 	}
 
-	private void createEvents() {
+	private void createEvents(ManageUsers user) {
 		// This button goes back to the previous menu
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,7 +135,7 @@ public class StudentView extends JFrame {
 		 */
 		btnSearchForBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BorrowMaterialsView search = new BorrowMaterialsView();
+				BorrowMaterialsView search = new BorrowMaterialsView(user);
 				search.setVisible(true);
 			}
 		});
@@ -144,12 +144,8 @@ public class StudentView extends JFrame {
 		 */
 		btnOrderMaterials.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				OrderMaterialsView order = new OrderMaterialsView();
-//				order.setVisible(true);
-				ArrayList<Material> materialList = new ArrayList<Material>();
-
-				MaterialsItemsDisplay list = new MaterialsItemsDisplay(materialList);
-				list.setVisible(true);
+				OrderMaterialsView order = new OrderMaterialsView();
+				order.setVisible(true);
 			}
 		});
 	}

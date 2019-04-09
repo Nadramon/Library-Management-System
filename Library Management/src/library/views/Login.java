@@ -52,50 +52,7 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login(ManageUsers users) {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		
-		txtSuccessfulLogin = new JTextField();
-		txtSuccessfulLogin.setText("SUCCESSFUL LOGIN");
-		txtSuccessfulLogin.setColumns(10);
-		
-		btnManageUsers = new JButton("Manage Users");
-		
-		btnBack = new JButton("Back");
-		
-		
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(22)
-					.addComponent(btnManageUsers)
-					.addPreferredGap(ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-					.addComponent(btnBack)
-					.addGap(37))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(txtSuccessfulLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnManageUsers)
-						.addComponent(btnBack))
-					.addContainerGap())
-		);
-		contentPane.setLayout(gl_contentPane);
-		createEvents(users);
-	}
-	
-	/**
-	 * @wbp.parser.constructor
-	 */
+
 	public Login(Student s, ManageUsers users) {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -158,11 +115,12 @@ public class Login extends JFrame {
         			.addContainerGap())
         );
         contentPane.setLayout(gl_contentPane);
-        createEvents(users);
+        createEvents(s,users);
     }
 	
+
 	// create events
-	private void createEvents(ManageUsers users) {
+	private void createEvents(Student stu ,ManageUsers users) {
 		/*
 		 * This method sets up a button in order to open the ManageUsersGUI
 		 */
@@ -170,7 +128,7 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			ArrayList<Student> archiveList = users.getArchiveList();
 			ArrayList<Student> activeList = users.getActiveList();
-			ManageUsersGUI manageUsers = new ManageUsersGUI(activeList, archiveList);
+			ManageUsersGUI manageUsers = new ManageUsersGUI(activeList, archiveList, stu);
 			dispose();
 			}
 		});
