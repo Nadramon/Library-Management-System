@@ -1,4 +1,4 @@
-<activeList>
+<Users>
 	<student>
 		<ucid>1001</ucid>
 		<firstName>John</firstName>
@@ -6,8 +6,9 @@
 		<currentBorrowing>0</currentBorrowing>
 		<isActive>true</isActive>
 		<username>Admin</username>
-		<Password>a</Password>
+		<password>a</password>
 		<isLibrarian>true</isLibrarian>
+		<fee>0.00</fee>
 	</student>
 	<student>
 		<ucid>1002</ucid>
@@ -16,8 +17,9 @@
 		<currentBorrowing>5</currentBorrowing>
 		<isActive>true</isActive>
 		<username>Hermione Granger</username>
-		<Password>Muggleborns4SPEW</Password>
+		<password>Muggleborns4SPEW!</password>
 		<isLibrarian>false</isLibrarian>
+		<fee>0.00</fee>
 	</student>
 	<student>
 		<ucid>1003</ucid>
@@ -26,8 +28,9 @@
 		<currentBorrowing>1</currentBorrowing>
 		<isActive>true</isActive>
 		<username>Darth Vader</username>
-		<Password>ILuvPadme66</Password>
+		<password>ILuvPadme66</password>
 		<isLibrarian>false</isLibrarian>
+		<fee>0.00</fee>
 	</student>
 	<student>
 		<ucid>1004</ucid>
@@ -36,7 +39,30 @@
 		<currentBorrowing>4</currentBorrowing>
 		<isActive>true</isActive>
 		<username>Steve Rogers</username>
-		<Password>ABCabc123</Password>
+		<password>ABCabc123?</password>
 		<isLibrarian>false</isLibrarian>
+		<fee>0.00</fee>
 	</student>
-</activeList>
+	<student>
+		<ucid>1005</ucid>
+		<firstName>James</firstName>
+		<lastName>Barnes</lastName>
+		<currentBorrowing>2</currentBorrowing>
+		<isActive>false</isActive>
+		<username>James Barnes</username>
+		<password>longing.1791</password>
+		<isLibrarian>false</isLibrarian>
+		<fee>0.00</fee>
+	</student>
+	<student>
+		<ucid>1006</ucid>
+		<firstName>Kara</firstName>
+		<lastName>Danvers</lastName>
+		<currentBorrowing>0</currentBorrowing>
+		<isActive>false</isActive>
+		<username>Kara Danvers</username>
+		<password>capesRcool.100</password>
+		<isLibrarian>false</isLibrarian>
+		<fee>0.00</fee>
+	</student>
+</Users>

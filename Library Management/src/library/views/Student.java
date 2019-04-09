@@ -157,6 +157,12 @@ public class Student {
         return isRight;
     }
     
+    /**
+     * Method to check if the password is strong, i.e. has 8 or more characters, at least one number,
+     * lower & upper case letters, and 1 special character
+     * @param pWord
+     * @return strongPword
+     */
     public static boolean isStrong(String pWord) {
         boolean strongPword = false;
         if (pWord.length() >= 8) {
