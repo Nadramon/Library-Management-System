@@ -76,28 +76,5 @@ public class MaterialsItemsDisplay extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-	private ArrayList<Material> rearrangeList(int choice) {
-
-		ArrayList<Material> listToSort = ManageUsers.getMaterialList();
-		int size = listToSort.size();
-		boolean swapped = true;
-		while (swapped) {
-			swapped = false;
-			for (int x = 0; x < size-1; x++) {
-
-				if (listToSort.get(x).getName().compareTo(listToSort.get(x+1).getName()) > 0) {
-					Material temp = listToSort.get(x+1);
-					listToSort.set(x+1, listToSort.get(x));
-					listToSort.set(x, temp);
-					swapped = true;
-				}
-					
-					
-			}
-		}
-		
-		return listToSort;
-				
-		
-	}
+	
 }
