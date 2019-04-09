@@ -4,6 +4,8 @@ public class Main {
 	public static ManageUsers students;
 	
 	public static void main(String[] args) {
+		Startup.getXMLUserList();
+		
 		Student ins = new Student ("Admin", "", 01, 0 , true, "admin", "admin",true);
 		Student stu = new Student ("Student", "", 02, 6, true, "Student", "password", false);
 		ManageUsers.getActiveList().add(ins);
