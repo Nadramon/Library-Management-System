@@ -45,6 +45,7 @@ public class ManageUsersGUI {
 	private DefaultTableModel dataActive;
 	private DefaultTableModel dataArchive;
 	private String[] header;
+	private Student stu;
 	
 	private ManageUsers user = new ManageUsers();
 
@@ -68,15 +69,15 @@ public class ManageUsersGUI {
 	 * Create the application.
 	 * @wbp.parser.entryPoint
 	 */
-	public ManageUsersGUI(ArrayList<Student> active, ArrayList<Student> archive) {
-		
+	public ManageUsersGUI(ArrayList<Student> active, ArrayList<Student> archive, Student stud) {
+		stu = stud;
 		activeList = active;
 		archiveList = archive;
 		
 		
 		
 		try {
-			initActive();
+			initActive(stud);
 			//this.initArchived();
 			activeFrame.setVisible(true);
 		}
@@ -90,7 +91,7 @@ public class ManageUsersGUI {
 	/**
 	 * initActive the contents of the activeFrame.
 	 */
-	private void initActive() {
+	private void initActive(Student stud) {
 		activeFrame = new JFrame();
 		activeFrame.setBounds(100, 100, 587, 505);
 		activeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -186,7 +187,7 @@ public class ManageUsersGUI {
 		JButton backBtn = new JButton("Back");
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login log = new Login(user);
+				Login log = new Login(stud,user);
 				log.setVisible(true);
 				activeFrame.dispose();
 				archivedFrame.dispose();
@@ -200,7 +201,7 @@ public class ManageUsersGUI {
 		switchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				activeFrame.dispose();
-				initArchived();
+				initArchived(stud);
 				archivedFrame.setVisible(true);
 				
 			}
@@ -296,7 +297,7 @@ public class ManageUsersGUI {
 	}
 	
 
-	private void initArchived() {
+	private void initArchived(Student stud) {
 		
 		
 		archivedFrame = new JFrame();
@@ -391,10 +392,8 @@ public class ManageUsersGUI {
 		JButton backBtn = new JButton("Back");
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Login log = new Login(user);
-				//log.setVisible(true);
-				LibraryUI temp = new LibraryUI();
-				temp.getFrame().setVisible(true);
+				Login log = new Login(stud,user);
+				log.setVisible(true);
 				activeFrame.dispose();
 				archivedFrame.dispose();
 				
@@ -406,7 +405,7 @@ public class ManageUsersGUI {
 		switchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				archivedFrame.dispose();
-				initActive();
+				initActive(stud);
 				activeFrame.setVisible(true);
 				
 			}
@@ -437,7 +436,7 @@ public class ManageUsersGUI {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(archivedLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(archivedTable, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+					.addComponent(archivedTable, GroupLayout.PREFERRED_SIZE, 353, GroupLayout.PREFERRED_SIZE)
 					.addGap(28)
 					//.addComponent(archivedLabel, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
 					//.addPreferredGap(ComponentPlacement.RELATED)
