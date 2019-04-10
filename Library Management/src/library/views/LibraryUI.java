@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import java.awt.Font;
@@ -139,16 +140,11 @@ public class LibraryUI {
             public void actionPerformed(ActionEvent e) { 
             	students = new ManageUsers();
                 ArrayList<Student> stu = students.getActiveList();
-                ArrayList<Student> studentArchive = students.getArchiveList();
+                ArrayList<Student> studentArchive = ManageUsers.getArchiveList();
                 String user = username.getText();
                 String pass = password.getText();
                 boolean loggy = false ;
-                for (int x = 0; x < studentArchive.size(); x++) {
-                	if (studentArchive.get(x).isActive() == false) {
-                		ArchivedAccountView archAccount = new ArchivedAccountView();
-                		archAccount.setVisible(true);
-                	}
-                }
+          
                 for(int x = 0; x < stu.size(); x++) {
                     if (stu.get(x).getUsername().equals(user)) {
                         if(stu.get(x).getPassword().equals(pass)) {
@@ -167,9 +163,19 @@ public class LibraryUI {
                         	}
                         }
                     } 
+                for (int x = 0; x < studentArchive.size(); x++) {
+             		 if (studentArchive.get(x).getUsername().equals(user)) {
+             			 if(studentArchive.get(x).getPassword().equals(pass)) {
+             					 JOptionPane.showMessageDialog(frame, "Account is Archived\n Please Ask a Librarian to reactivate ", "Archived Account", JOptionPane.WARNING_MESSAGE);
+             					 loggy = true;
+             			 }
+             		 }
+                }
+           
                 if (loggy == false) {
-                    FailLogin fail = new FailLogin();
-                    fail.setVisible(true);
+            		   FailLogin fail = new FailLogin();
+                       fail.setVisible(true);
+                 
                 }
             }
         });
