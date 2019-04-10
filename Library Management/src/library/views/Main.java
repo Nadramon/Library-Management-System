@@ -1,5 +1,11 @@
 package library.views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Main {
 	public static ManageUsers students;
 	
@@ -22,6 +28,24 @@ public class Main {
 		ManageUsers.getMaterialList().add(ref);
 		Material lap = new Material("Laptop", "Chromebook", true, 5);
 		ManageUsers.getMaterialList().add(lap);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		//calculate the deadline date
+		Date currentDate = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2017, 2, 23);
+		Date deadline = null;
+		try {
+			deadline = sdf.parse(sdf.format(calendar.getTime()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Borrowings a = new Borrowings(1009, 0, deadline);
+		ManageUsers.getBorrowingList().add(a);
+		
 		LibraryUI lol = new LibraryUI();
 		lol.getFrame().setVisible(true);
 

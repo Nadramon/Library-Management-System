@@ -274,7 +274,7 @@ public class Login extends JFrame {
 								deadline = users.getBorrowingList().get(x).getDue();
 								
 								users.getMaterialList().get(materialId).setCountAvailable(1);
-								for (int y = 0; y < users.getActiveList().size(); x++) {
+								for (int y = 0; y < users.getActiveList().size(); y++) {
 									if (users.getActiveList().get(y).getUcid() == studentId) {
 										users.getActiveList().get(y).setCurrentBorrowing(-1);
 										break;
@@ -282,7 +282,6 @@ public class Login extends JFrame {
 								}
 								msg = 	users.getMaterialList().get(materialId).getName() + " has been returned!";	
 								success = true;
-								
 								users.getBorrowingList().remove(x);
 								break;
 									

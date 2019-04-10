@@ -2,6 +2,8 @@ package library.views;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,11 +15,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class OrderMaterialsView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField_1;
+	
+	public ManageUsers students;
 
 	/**
 	 * Launch the application.
@@ -26,8 +31,8 @@ public class OrderMaterialsView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OrderMaterialsView frame = new OrderMaterialsView();
-					frame.setVisible(true);
+					//OrderMaterialsView frame = new OrderMaterialsView();
+					//frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -38,7 +43,7 @@ public class OrderMaterialsView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public OrderMaterialsView() {
+	public OrderMaterialsView(Student stu) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 301, 363);
 		contentPane = new JPanel();
@@ -46,6 +51,15 @@ public class OrderMaterialsView extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton btnPlaceOrder = new JButton("Place Order");
+		btnPlaceOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(contentPane, "Your Order has been sent for a review!", "Info", JOptionPane.INFORMATION_MESSAGE);
+				StudentView log = new StudentView(stu,students);
+				log.setVisible(true);
+				dispose();
+
+			}
+		});
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);

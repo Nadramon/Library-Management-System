@@ -25,6 +25,7 @@ public class StudentView extends JFrame {
 	//private JButton btnReturnBook;
 	private JButton btnSearchForBook;
 	private JButton btnOrderMaterials;
+	private Student stu;
 	
 	/**
 	 * Launch the application.
@@ -46,6 +47,7 @@ public class StudentView extends JFrame {
 	 * Create the frame.
 	 */
 	public StudentView(Student s, ManageUsers users) {
+		stu = s;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -145,7 +147,7 @@ public class StudentView extends JFrame {
 		 */
 		btnOrderMaterials.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				OrderMaterialsView order = new OrderMaterialsView();
+				OrderMaterialsView order = new OrderMaterialsView(stu);
 				order.setVisible(true);
 			}
 		});

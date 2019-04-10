@@ -146,7 +146,7 @@ public class BorrowMaterialsView extends JFrame {
 				
 				MaterialsItemsDisplay list = new MaterialsItemsDisplay(materialList);
 				if (typeOfSearch == "Books" && typeOfMaterial == "Author") {
-					 for (int x = 0; x < user.getMaterialList().size(); x++) {
+					 for (int x = 0; x < materialList.size(); x++) {
 						 if(materialList.get(x).getType() == "Book"){
 							 list.setVisible(true);
 						 }
@@ -156,29 +156,29 @@ public class BorrowMaterialsView extends JFrame {
 					JOptionPane.showMessageDialog(contentPane, "That combination is not possible", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else if (typeOfSearch == "Books" && typeOfMaterial == "Name") {
-					for (int x = 0; x < user.getMaterialList().size(); x++) {
+					for (int x = 0; x < materialList.size(); x++) {
 						 if(materialList.get(x).getType() == "Book"){
 							 list.setVisible(true);
 						 }
 					 }
 				}
 				else if (typeOfSearch == "Books" && typeOfMaterial == "ID") {
-					for (int x = 0; x < user.getMaterialList().size(); x++) {
+					for (int x = 0; x < materialList.size(); x++) {
 						 if(materialList.get(x).getType() == "Book"){
 							 list.setVisible(true);
 						 }
 					 }
 				}
 				else if (typeOfSearch == "Materials" && typeOfMaterial == "Name") {
-					for (int x = 0; x < user.getMaterialList().size(); x++) {
-						 if(materialList.get(x).getType() == "Book"){
+					for (int x = 0; x < materialList.size(); x++) {
+						 if(materialList.get(x).getType() != "Book"){
 							 list.setVisible(true);
 						 }
 					 }
 				}
 				else if (typeOfSearch == "Materials" && typeOfMaterial == "ID") {
-					for (int x = 0; x < user.getMaterialList().size(); x++) {
-						 if(materialList.get(x).getType() == "Book"){
+					for (int x = 0; x < materialList.size(); x++) {
+						 if(materialList.get(x).getType() != "Book"){
 							 list.setVisible(true);
 						 }
 					 }
