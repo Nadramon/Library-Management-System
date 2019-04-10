@@ -26,7 +26,7 @@ import java.awt.Color;
 public class BorrowMaterialsView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textFieldSearch;
+	private JTextField textField;
 	private JButton btnSearch;
 	private JComboBox comboBox_BM;
 	private JLabel lblBy;
@@ -59,8 +59,8 @@ public class BorrowMaterialsView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		textFieldSearch = new JTextField();
-		textFieldSearch.setColumns(10);
+		textField = new JTextField();
+		textField.setColumns(10);
 		
 		btnSearch = new JButton("Search");
 		
@@ -82,7 +82,7 @@ public class BorrowMaterialsView extends JFrame {
 					.addGap(26)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textFieldSearch, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(btnSearch))
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -106,7 +106,7 @@ public class BorrowMaterialsView extends JFrame {
 						.addComponent(comboBox_BM, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textFieldSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnSearch))
 					.addContainerGap(54, Short.MAX_VALUE))
 		);
@@ -122,11 +122,31 @@ public class BorrowMaterialsView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String typeOfSearch = (String) comboBox_BM.getSelectedItem();
 				String typeOfMaterial = (String) comboBox_Aut.getSelectedItem();
-				MaterialsItemsDisplay list = new MaterialsItemsDisplay(user.getMaterialList());
-				ArrayList<Material> materialList = user.getMaterialList();
-				String txt = textFieldSearch.getText();
+				ArrayList<Material> materialList = new ArrayList<Material>();
+				
+				if (typeOfSearch == "Books") {
+					
+					for (int y = 0; y < user.getMaterialList().size(); y++) {
+						if (user.getMaterialList().get(y).getType() == "Book") {
+							System.out.println(y);
+							materialList.add(user.getMaterialList().get(y));
+						}
+					}
+				}
+				else {
+					materialList = user.getMaterialList();
+				}
+				
+				
+				if (typeOfMaterial == "Name") {
+					materialList = rearrangeList(materialList);
+				}
+				
+				
+				
+				MaterialsItemsDisplay list = new MaterialsItemsDisplay(materialList);
 				if (typeOfSearch == "Books" && typeOfMaterial == "Author") {
-					 for (int x = 0; x < user.getMaterialList().size(); x++) {
+					 for (int x = 0; x < materialList.size(); x++) {
 						 if(materialList.get(x).getType() == "Book"){
 							 list.setVisible(true);
 						 }
@@ -136,29 +156,29 @@ public class BorrowMaterialsView extends JFrame {
 					JOptionPane.showMessageDialog(contentPane, "That combination is not possible", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else if (typeOfSearch == "Books" && typeOfMaterial == "Name") {
-					for (int x = 0; x < user.getMaterialList().size(); x++) {
+					for (int x = 0; x < materialList.size(); x++) {
 						 if(materialList.get(x).getType() == "Book"){
 							 list.setVisible(true);
 						 }
 					 }
 				}
 				else if (typeOfSearch == "Books" && typeOfMaterial == "ID") {
-					for (int x = 0; x < user.getMaterialList().size(); x++) {
+					for (int x = 0; x < materialList.size(); x++) {
 						 if(materialList.get(x).getType() == "Book"){
 							 list.setVisible(true);
 						 }
 					 }
 				}
 				else if (typeOfSearch == "Materials" && typeOfMaterial == "Name") {
-					for (int x = 0; x < user.getMaterialList().size(); x++) {
-						 if(materialList.get(x).getName() == txt){
+					for (int x = 0; x < materialList.size(); x++) {
+						 if(materialList.get(x).getType() != "Book"){
 							 list.setVisible(true);
 						 }
 					 }
 				}
 				else if (typeOfSearch == "Materials" && typeOfMaterial == "ID") {
-					for (int x = 0; x < user.getMaterialList().size(); x++) {
-						 if(materialList.get(x).getType() == "Book"){
+					for (int x = 0; x < materialList.size(); x++) {
+						 if(materialList.get(x).getType() != "Book"){
 							 list.setVisible(true);
 						 }
 					 }
@@ -166,6 +186,30 @@ public class BorrowMaterialsView extends JFrame {
 				
 			}
 		});
+	}
+	
+	private ArrayList<Material> rearrangeList(ArrayList<Material> listToSort) {
+
+		int size = listToSort.size();
+		boolean swapped = true;
+		while (swapped) {
+			swapped = false;
+			for (int x = 0; x < size-1; x++) {
+
+				if (listToSort.get(x).getName().compareTo(listToSort.get(x+1).getName()) > 0) {
+					Material temp = listToSort.get(x+1);
+					listToSort.set(x+1, listToSort.get(x));
+					listToSort.set(x, temp);
+					swapped = true;
+				}
+					
+					
+			}
+		}
+		
+		return listToSort;
+				
+		
 	}
 	
 }

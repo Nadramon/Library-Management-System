@@ -143,6 +143,12 @@ public class LibraryUI {
                 String user = username.getText();
                 String pass = password.getText();
                 boolean loggy = false ;
+                for (int x = 0; x < studentArchive.size(); x++) {
+                	if (studentArchive.get(x).isActive() == false) {
+                		ArchivedAccountView archAccount = new ArchivedAccountView();
+                		archAccount.setVisible(true);
+                	}
+                }
                 for(int x = 0; x < stu.size(); x++) {
                     if (stu.get(x).getUsername().equals(user)) {
                         if(stu.get(x).getPassword().equals(pass)) {

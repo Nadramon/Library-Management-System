@@ -1,17 +1,14 @@
 package library.views;
 
-
-/**
- * The main class of our function - run this one, and you can use the system.
- */
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
+/**
+ * The main class of our function - run this one, and you can use the system.
+ */
 public class Main {
 	public static ManageUsers students;
 	
@@ -24,6 +21,7 @@ public class Main {
 		ManageUsers.getActiveList().add(ins);
 		ManageUsers.getActiveList().add(stu);
 
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		//calculate the deadline date
