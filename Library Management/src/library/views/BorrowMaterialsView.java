@@ -26,7 +26,7 @@ import java.awt.Color;
 public class BorrowMaterialsView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textFieldSearch;
 	private JButton btnSearch;
 	private JComboBox comboBox_BM;
 	private JLabel lblBy;
@@ -59,8 +59,8 @@ public class BorrowMaterialsView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		textFieldSearch = new JTextField();
+		textFieldSearch.setColumns(10);
 		
 		btnSearch = new JButton("Search");
 		
@@ -82,7 +82,7 @@ public class BorrowMaterialsView extends JFrame {
 					.addGap(26)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+							.addComponent(textFieldSearch, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(btnSearch))
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -106,7 +106,7 @@ public class BorrowMaterialsView extends JFrame {
 						.addComponent(comboBox_BM, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnSearch))
 					.addContainerGap(54, Short.MAX_VALUE))
 		);
@@ -124,7 +124,7 @@ public class BorrowMaterialsView extends JFrame {
 				String typeOfMaterial = (String) comboBox_Aut.getSelectedItem();
 				MaterialsItemsDisplay list = new MaterialsItemsDisplay(user.getMaterialList());
 				ArrayList<Material> materialList = user.getMaterialList();
-				
+				String txt = textFieldSearch.getText();
 				if (typeOfSearch == "Books" && typeOfMaterial == "Author") {
 					 for (int x = 0; x < user.getMaterialList().size(); x++) {
 						 if(materialList.get(x).getType() == "Book"){
@@ -151,7 +151,7 @@ public class BorrowMaterialsView extends JFrame {
 				}
 				else if (typeOfSearch == "Materials" && typeOfMaterial == "Name") {
 					for (int x = 0; x < user.getMaterialList().size(); x++) {
-						 if(materialList.get(x).getType() == "Book"){
+						 if(materialList.get(x).getName() == txt){
 							 list.setVisible(true);
 						 }
 					 }
