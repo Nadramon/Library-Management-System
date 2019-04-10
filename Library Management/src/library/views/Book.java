@@ -17,6 +17,12 @@ public class Book extends Material {
         title = t;
     }
     
+    public Book(String objType, String t, String auth, boolean isRef, int ID, int tot, int avail) {
+        super(objType, t, isRef, ID, tot, avail);
+        author = auth;
+        title = t;
+    }
+    
     public String getAuthor() {
         return author;
     }
