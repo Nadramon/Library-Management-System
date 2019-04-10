@@ -174,7 +174,7 @@ public class LibraryUI {
             }
         });
 		
-        // This switches to the Register GUi when the user presses the Register button.
+        // This switches to the Register GUI when the user presses the Register button.
 		btnNewUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Register reg = new Register();
