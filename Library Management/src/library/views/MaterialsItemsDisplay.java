@@ -74,4 +74,6 @@ public class MaterialsItemsDisplay extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+
 }

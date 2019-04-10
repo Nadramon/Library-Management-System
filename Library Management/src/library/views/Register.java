@@ -164,9 +164,6 @@ public class Register extends JDialog {
 					
 				}
 
-				Student ins = new Student(fName, lName, ucid, 0, true, false);
-				stu.add(ins);	
-				dispose();
 
 			}
 		});
