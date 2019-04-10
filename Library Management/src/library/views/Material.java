@@ -1,7 +1,5 @@
 package library.views;
 
-import java.util.ArrayList;
-
 public class Material {
     private String type;
     private String name;
@@ -20,6 +18,15 @@ public class Material {
         id = ID;
         totalInLibrary = 1;
         countAvailable = 1;
+    }
+    
+    public Material(String objType, String n, boolean isRef, int ID, int totalInLib, int available) {
+        type = objType;
+        name = n;
+        isAReferenceMaterial = isRef;
+        id = ID;
+        totalInLibrary = totalInLib;
+        countAvailable = available;
     }
 
     

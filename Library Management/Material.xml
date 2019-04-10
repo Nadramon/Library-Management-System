@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Stock>
+	<Material>
+		<type>Chair</type>
+		<name>IKEA-261</name>
+		<id>1</id>
+		<isRef>true</isRef>
+		<available>10</available>
+		<totalInLib>10</totalInLib>
+	</Material>
+	<Material>
+		<type>Chair</type>
+		<name>IKEA-2a1</name>
+		<id>2</id>
+		<isRef>true</isRef>
+		<available>20</available>
+		<totalInLib>20</totalInLib>
+	</Material>
+	<Material>
+		<type>Laptop</type>
+		<name>Chromebook</name>
+		<id>5</id>
+		<isRef>true</isRef>
+		<available>5</available>
+		<totalInLib>5</totalInLib>
+	</Material>
+	<Material>
+		<type>Book</type>
+		<name>Harry Potter</name>
+		<author>Rowling</author>
+		<id>0</id>
+		<isRef>false</isRef>
+		<available>1</available>
+		<totalInLib>2</totalInLib>
+	</Material>
+	<Material>
+		<type>Book</type>
+		<name>Percy Jackson</name>
+		<author>Riordan</author>
+		<id>3</id>
+		<isRef>false</isRef>
+		<available>1</available>
+		<totalInLib>1</totalInLib>
+	</Material>
+	<Material>
+		<type>Book</type>
+		<name>Maps of Africa</name>
+		<author>Zinetti</author>
+		<id>4</id>
+		<isRef>true</isRef>
+		<available>1</available>
+		<totalInLib>1</totalInLib>
+	</Material>
+</Stock>
