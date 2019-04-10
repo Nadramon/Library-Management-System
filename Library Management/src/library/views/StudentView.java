@@ -95,10 +95,10 @@ public class StudentView extends JFrame {
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
-		createEvents(users);
+		createEvents(s,users);
 	}
 
-	private void createEvents(ManageUsers user) {
+	private void createEvents(Student s, ManageUsers user) {
 		// This button goes back to the previous menu
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -121,7 +121,7 @@ public class StudentView extends JFrame {
 		 */
 		btnOrderMaterials.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				OrderMaterialsView order = new OrderMaterialsView();
+				OrderMaterialsView order = new OrderMaterialsView(s);
 				order.setVisible(true);
 			}
 		});
