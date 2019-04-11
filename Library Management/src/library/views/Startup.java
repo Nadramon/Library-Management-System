@@ -109,7 +109,7 @@ public class Startup {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document material = builder.parse(xmlFile);
 			
-		    NodeList materialNodes = material.getElementsByTagName("");
+		    NodeList materialNodes = material.getElementsByTagName("Material");
 		    
 		    for(int i = 0; i < materialNodes.getLength(); i++) { // Go through each material node
 		        Node materialNode = materialNodes.item(i);
@@ -133,7 +133,6 @@ public class Startup {
 		            	String author = materialEl.getElementsByTagName("author").item(0).getTextContent();
 		            	Book newBook = new Book(type, name, author, isRef, ID, totInLib, available);
 		            	materialList.add(newBook);
-		        		System.out.println("Done");
 		            } else {
 		            	Material newMat = new Material(type, name, isRef, ID, totInLib, available);
 		            	materialList.add(newMat);
