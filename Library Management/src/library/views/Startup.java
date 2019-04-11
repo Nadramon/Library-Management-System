@@ -28,19 +28,6 @@ public class Startup {
 	}
 	
 	/**
-	 * Method to grab the data from persistent storage and put in the correct data structures,
-	 * to be run when the system starts up.
-	 */
-	public static void startup() {
-		// Read a person from activeList.xml
-		// Construct a Student from that
-		// Add them to activeList array
-		// Loop through the other students
-		
-		// And continue for the other files...
-	}
-	
-	/**
 	 * Method to grab the user data from persistent storage and put in the correct data structures,
 	 * to be run when the system starts up.
 	 * 
