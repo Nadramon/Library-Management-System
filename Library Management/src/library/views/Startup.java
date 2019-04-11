@@ -55,6 +55,7 @@ public class Startup {
 			
 		    NodeList studentNodes = users.getElementsByTagName("student");
 		    for(int i = 0; i < studentNodes.getLength(); i++) { // Go through each student node
+		    	
 		        Node studentNode = studentNodes.item(i);
 		        if(studentNode.getNodeType() == Node.ELEMENT_NODE) {
 		            Element studentEl = (Element) studentNode;
@@ -106,8 +107,7 @@ public class Startup {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document material = builder.parse(xmlFile);
 			
-		    NodeList materialNodes = material.getElementsByTagName("");
-		    
+		    NodeList materialNodes = material.getElementsByTagName("Material");
 		    for(int i = 0; i < materialNodes.getLength(); i++) { // Go through each material node
 		        Node materialNode = materialNodes.item(i);
 		        if(materialNode.getNodeType() == Node.ELEMENT_NODE) {

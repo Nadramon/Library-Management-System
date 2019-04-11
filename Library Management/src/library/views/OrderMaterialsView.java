@@ -54,8 +54,6 @@ public class OrderMaterialsView extends JFrame {
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(contentPane, "Your Order has been sent for a review!", "Info", JOptionPane.INFORMATION_MESSAGE);
-				StudentView log = new StudentView(stu,students);
-				log.setVisible(true);
 				dispose();
 
 			}
