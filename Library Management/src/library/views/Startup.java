@@ -22,7 +22,8 @@ public class Startup {
 	 */
 	public static void main(String[] args) {
 		//getXMLUserList();
-		getXMLBorrowings();
+		//getXMLBorrowings();
+		getXMLMaterials();
 
 	}
 	
@@ -128,10 +129,11 @@ public class Startup {
 		            int totInLib = Integer.parseInt(totinlib);
 		            
 		            // Deal with it being a book subclass & store new instance in materialList
-		            if(type == "Book") {
+		            if(type.compareTo("Book") == 0) {
 		            	String author = materialEl.getElementsByTagName("author").item(0).getTextContent();
 		            	Book newBook = new Book(type, name, author, isRef, ID, totInLib, available);
 		            	materialList.add(newBook);
+		        		System.out.println("Done");
 		            } else {
 		            	Material newMat = new Material(type, name, isRef, ID, totInLib, available);
 		            	materialList.add(newMat);
