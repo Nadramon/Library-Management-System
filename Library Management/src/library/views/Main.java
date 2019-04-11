@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * The main class of our function - run this one, and you can use the system.
+ * The main class of our function - run this one, and you can use the entire system.
  */
 public class Main {
 	public static ManageUsers students;

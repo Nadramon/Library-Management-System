@@ -2,6 +2,10 @@ package library.views;
 
 import java.util.Date;
 
+/**
+ * Class that keeps track of which students have which books, and when they're due
+ *
+ */
 public class Borrowings {
 
 	private int studentId;
