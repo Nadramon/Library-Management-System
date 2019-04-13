@@ -15,6 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		Startup.getXMLUserList();
 		Startup.getXMLMaterials();
+		Startup.getXMLBorrowings();
 		
 		Student ins = new Student ("Admin", "", 01, 0 , true, "admin", "admin", true);
 		Student stu = new Student ("Student", "", 02, 6, true, "Student", "password", false);

@@ -18,26 +18,15 @@ import org.w3c.dom.Element;
 public class Startup {
 
 	/**
+	 * Main method just calls the startup functions to get all the data from xml files into the system
+	 * Never called, but good to have here
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//getXMLUserList();
-		//getXMLBorrowings();
+		getXMLUserList();
+		getXMLBorrowings();
 		getXMLMaterials();
 
-	}
-	
-	/**
-	 * Method to grab the data from persistent storage and put in the correct data structures,
-	 * to be run when the system starts up.
-	 */
-	public static void startup() {
-		// Read a person from activeList.xml
-		// Construct a Student from that
-		// Add them to activeList array
-		// Loop through the other students
-		
-		// And continue for the other files...
 	}
 	
 	/**
@@ -190,5 +179,64 @@ public class Startup {
 		}
 		// Store our arrays so they are accessible elsewhere
 		ManageUsers.setBorrowingList(borrowingList);
+	}
+	
+	/**
+	 * Would have been one method that saved the progress of the whole system to the xml files
+	 */
+	public void saveProgress() {
+		saveUsers();
+		saveMaterials();
+		saveBorrowings();
+	}
+	
+	/**
+	 * Method to put the users arrays back in the xml document
+	 * 
+	 * This method is a work in progress (or, at this point, mostly abandoned).
+	 * 
+	 * Reference: https://www.makeuseof.com/tag/read-write-xml-file-code/
+	 */
+	public void saveUsers() {
+		try {
+			
+			File xmlFile = new File("Users.xml");
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(xmlFile);
+			Element users = document.getDocumentElement();
+			
+			ArrayList<Student> u = ManageUsers.getActiveList();
+			for (int i = 0; i < u.size(); i++) {
+				// Grab the info for a specific student
+				Student s = u.get(i);
+				String fName = s.getFirstName();
+				String lName = s.getLastName();
+				int ucid = s.getUcid();
+				int currentBorrowing = s.getCurrentBorrowing();
+				boolean isActive = true;
+			    String username = s.getUsername();
+			    String password = s.getPassword();
+			    boolean isLibrarian = s.getIsLibrarian();
+			    
+			    Element student = document.createElement("student");
+			    
+			    // Make a new element <student>
+			    // Add the element to the xml as a child of <Users>
+			    // Add the above fields (fName, etc.) as child nodes to the new student node
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Something went wrong with writing to the xml");
+			System.out.println(e);
+		}
+	}
+	
+	public void saveMaterials() {
+		// Would have been like saveUsers
+	}
+	
+	public void saveBorrowings() {
+		// Would have been like saveUsers
 	}
 }
