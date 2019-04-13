@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 
-public class BorrowMaterialsView extends JFrame {
+public class SearchView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldSearch;
@@ -52,7 +52,7 @@ public class BorrowMaterialsView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BorrowMaterialsView(ManageUsers user) {
+	public SearchView(ManageUsers user) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 188);
 		contentPane = new JPanel();

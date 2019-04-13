@@ -39,7 +39,7 @@ public class Main {
 		Borrowings a = new Borrowings(1009, 0, deadline);
 		ManageUsers.getBorrowingList().add(a);
 		
-		LibraryUI lol = new LibraryUI();
+		Login lol = new Login();
 		lol.getFrame().setVisible(true);
 
 	}

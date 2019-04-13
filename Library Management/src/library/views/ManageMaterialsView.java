@@ -203,7 +203,7 @@ public class ManageMaterialsView {
 		JButton backBtn = new JButton("Back");
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login log = new Login(stud, user);
+				LibrarianView log = new LibrarianView(stud, user);
 				log.setVisible(true);
 				activeFrame.dispose();
 				

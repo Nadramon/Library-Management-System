@@ -123,7 +123,7 @@ public class StudentView extends JFrame {
 		// This button goes back to the previous menu
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LibraryUI lib = new LibraryUI();
+				Login lib = new Login();
 				lib.getFrame().setVisible(true);
 				dispose();
 			}
@@ -134,7 +134,7 @@ public class StudentView extends JFrame {
 		 */
 		btnSearchForBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BorrowMaterialsView search = new BorrowMaterialsView(user);
+				SearchView search = new SearchView(user);
 				search.setVisible(true);
 			}
 		});
