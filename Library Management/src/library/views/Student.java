@@ -112,7 +112,9 @@ public class Student {
 		this.isActive = isActive;
 	}
 	
-	
+/*
+ * This password generation was attempted to be implemented however it was not implemented.
+ */
 	//password generation from 
     //https://www.javacodegeeks.com/2012/05/secure-password-storage-donts-dos-and.html
     public boolean generatePassword(String pw) {
