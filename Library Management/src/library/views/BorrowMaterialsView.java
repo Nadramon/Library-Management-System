@@ -1,4 +1,4 @@
-// This is the window to Borrow Materials, It pop ups a search so users can search for books/materials
+// This is the window to Borrow Materials, It pop ups a search UI so users can search for books/materials
 
 package library.views;
 
@@ -132,7 +132,9 @@ public class BorrowMaterialsView extends JFrame {
 	private void createEvents(ManageUsers user) {
 		// The search button searches for the items based on categories of search and name
 		// If The item exists in the list then it opens a window with the list
-		// If the item doesn't exist  a popup appears
+		// If the item doesn't exist  a popup appears (Currently doesnt work)
+		// Also popups a not possible notification if the combination doesnt make sense
+		
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String typeOfSearch = (String) comboBox_BM.getSelectedItem();

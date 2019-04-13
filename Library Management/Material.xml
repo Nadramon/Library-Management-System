@@ -51,4 +51,31 @@
 		<available>1</available>
 		<totalInLib>1</totalInLib>
 	</Material>
+	<Material>
+		<type>Book</type>
+		<name>Don Quixote</name>
+		<author>Cervantes</author>
+		<id>6</id>
+		<isRef>false</isRef>
+		<available>1</available>
+		<totalInLib>1</totalInLib>
+	</Material>
+	<Material>
+		<type>Book</type>
+		<name>The Great Gatsby</name>
+		<author>Fitzgerald</author>
+		<id>7</id>
+		<isRef>false</isRef>
+		<available>2</available>
+		<totalInLib>3</totalInLib>
+	</Material>
+	<Material>
+		<type>Book</type>
+		<name>Hamlet</name>
+		<author>Shakespeare</author>
+		<id>8</id>
+		<isRef>false</isRef>
+		<available>3</available>
+		<totalInLib>5</totalInLib>
+	</Material>
 </Stock>

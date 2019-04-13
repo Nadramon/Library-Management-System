@@ -207,11 +207,11 @@ public class ManageUsersGUI {
 			}
 		});
 		
-		
 		//button for making a student a librarian
 		JButton makeLibrarianBtn = new JButton("Make Librarian");
 		makeLibrarianBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				
 				String studentIdS = JOptionPane.showInputDialog(activeFrame, "Enter the Student ID to make a Librarian", null);
 

@@ -1,6 +1,7 @@
 package library.views;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -20,7 +21,9 @@ public class Startup {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		getXMLUserList();
+		//getXMLUserList();
+		//getXMLBorrowings();
+		getXMLMaterials();
 
 	}
 	
@@ -108,6 +111,7 @@ public class Startup {
 			Document material = builder.parse(xmlFile);
 			
 		    NodeList materialNodes = material.getElementsByTagName("Material");
+
 		    for(int i = 0; i < materialNodes.getLength(); i++) { // Go through each material node
 		        Node materialNode = materialNodes.item(i);
 		        if(materialNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -126,7 +130,7 @@ public class Startup {
 		            int totInLib = Integer.parseInt(totinlib);
 		            
 		            // Deal with it being a book subclass & store new instance in materialList
-		            if(type == "Book") {
+		            if(type.compareTo("Book") == 0) {
 		            	String author = materialEl.getElementsByTagName("author").item(0).getTextContent();
 		            	Book newBook = new Book(type, name, author, isRef, ID, totInLib, available);
 		            	materialList.add(newBook);
@@ -143,5 +147,48 @@ public class Startup {
 		// Store our array so it is accessible elsewhere
 		ManageUsers.setMaterialList(materialList);
 	}
-
+	
+	/**
+	 * Method to grab the borrowings data from persistent storage and put in the correct data structures,
+	 * to be run when the system starts up.
+	 * (Code base taken from above)
+	 */
+	public static void getXMLBorrowings() {
+		// Make some local arrays to use below
+		ArrayList<Borrowings> borrowingList = new ArrayList<Borrowings>();
+		try {
+			// Retrieving the xml file stuff
+			File xmlFile = new File("Borrowings.xml");
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document borrowings = builder.parse(xmlFile);
+			
+			// Get all the nodes with tag "rent"
+			NodeList rentNodes = borrowings.getElementsByTagName("rent");
+			for(int i = 0; i < rentNodes.getLength(); i++) { // Go through each rent node
+			    Node rentNode = rentNodes.item(i);
+			    if(rentNode.getNodeType() == Node.ELEMENT_NODE) {
+			    	Element rentEl = (Element) rentNode;
+			        // Get the borrowings info (and convert types when necessary)
+			        String sid = rentEl.getElementsByTagName("studentID").item(0).getTextContent();
+			        int sID = Integer.parseInt(sid);
+			        String mid = rentEl.getElementsByTagName("materialID").item(0).getTextContent();
+			        int mID = Integer.parseInt(mid);
+			        String duemilli = rentEl.getElementsByTagName("due").item(0).getTextContent();
+			        long due = Long.parseLong(duemilli);
+			        Date deadline = new Date(due);
+			        
+			        // And then create all a new instance of Borrowings with the info
+				    Borrowings newBorrow = new Borrowings(sID, mID, deadline);
+				    // Put the newly created borrowing instance in the list
+				    borrowingList.add(newBorrow);
+			    }
+			}
+		} catch (Exception e) {
+			System.out.println("Something went wrong with the Users.xml parsing");
+			System.out.println(e);
+		}
+		// Store our arrays so they are accessible elsewhere
+		ManageUsers.setBorrowingList(borrowingList);
+	}
 }

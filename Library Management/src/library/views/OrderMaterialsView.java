@@ -16,7 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+/*
+ * This Class generates a form in order for students to place an order for materials
+ */
 public class OrderMaterialsView extends JFrame {
 
 	private JPanel contentPane;

@@ -1,5 +1,7 @@
-// The main library management program UI to start
-
+/*
+ * This is the Login UI where users of this System can log into their accounts or register for new accounts
+ * It has pop ups and notifications if there is invalid logins/registers 
+ */
 package library.views;
 import java.awt.EventQueue;
 import java.awt.Window;
@@ -132,10 +134,13 @@ public class LibraryUI {
 		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
-	
+	/*
+	 * This method is where all the different functionality of the UI goes such as the buttons
+	 */
 	private void createEvents() {
-        // This method logs in the user assuming they are signed up in the system
+        // This method/button logs in the user assuming they are signed up in the system
 		// Pop ups a fail login screen if they are not signed up/wrong password or username
+		// Also if a user's account is has been archived a message pop ups
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
             	students = new ManageUsers();
@@ -180,7 +185,7 @@ public class LibraryUI {
             }
         });
 		
-        // This switches to the Register GUi when the user presses the Register button.
+        // This switches to the Register GUI when the user presses the Register button.
 		btnNewUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Register reg = new Register();

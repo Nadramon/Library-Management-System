@@ -1,5 +1,7 @@
 package library.views;
-
+/*
+ * This class displays the list of items stored in the system in a table form.
+ */
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.ArrayList;

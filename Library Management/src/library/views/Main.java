@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * The main class of our function - run this one, and you can use the system.
+ * The main class of our function - run this one, and you can use the entire system.
  */
 public class Main {
 	public static ManageUsers students;
@@ -20,8 +20,7 @@ public class Main {
 		Student stu = new Student ("Student", "", 02, 6, true, "Student", "password", false);
 		ManageUsers.getActiveList().add(ins);
 		ManageUsers.getActiveList().add(stu);
-//		Material kla = new Material("Book", " Chromebook", false, 1 ,1 ,1);
-//		ManageUsers.getMaterialList().add(kla);
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		//calculate the deadline date

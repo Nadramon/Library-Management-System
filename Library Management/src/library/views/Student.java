@@ -23,7 +23,7 @@ public class Student {
     private byte[]  salt;
     private String  passwordo 			= "";
     private boolean isLibrarian			= false;
-
+    private int fee;
 
 	
 	
@@ -48,7 +48,9 @@ public class Student {
         isLibrarian = isLib;
         
     }
-
+/*
+ *  Massive list of just getters and setters
+ */
 	public String getUsername() {return username;}
 
 	public boolean getIsLibrarian() {

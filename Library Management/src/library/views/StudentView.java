@@ -1,4 +1,6 @@
-// This view is when a student logs in, They get to see the functionality that a student would be able to use
+/*
+ *  This view/UI appears when a student logs in, They get to see the functionality that a student would be able to use
+ */
 
 package library.views;
 
@@ -22,7 +24,6 @@ public class StudentView extends JFrame {
 	private JPanel contentPane;
 	private JTextField welcomeTxt;
 	private JButton btnBack;
-	//private JButton btnReturnBook;
 	private JButton btnSearchForBook;
 	private JButton btnOrderMaterials;
 	private Student stu;
@@ -56,16 +57,15 @@ public class StudentView extends JFrame {
 		
 		btnSearchForBook = new JButton("Search for Book/Material");
 		
-		//JButton btnBorrowBook = new JButton("Borrow Book");
+		
 		
 		welcomeTxt = new JTextField();
 		welcomeTxt.setColumns(10);
-		welcomeTxt.setText("Logged in as: " + s.getFirstName() + " " + s.getLastName() + ", current books: " + s.getCurrentBorrowing());
+		welcomeTxt.setText("Logged in as: " + s.getFirstName() + " " + s.getLastName() + ", current books: " + s.getCurrentBorrowing() + "Fee" );
 		
 		btnBack = new JButton("Back");
 		
-		//btnReturnBook = new JButton("Return Book");
-		
+
 		btnOrderMaterials = new JButton("Order Materials");
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -115,7 +115,10 @@ public class StudentView extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 		createEvents(users);
 	}
-
+	
+	/*
+	 * This method is where all the different functionality of the UI goes such as the buttons
+	 */
 	private void createEvents(ManageUsers user) {
 		// This button goes back to the previous menu
 		btnBack.addActionListener(new ActionListener() {
@@ -125,16 +128,9 @@ public class StudentView extends JFrame {
 				dispose();
 			}
 		});
-		// This button lets the user return materials
-		/*btnReturnBook.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ReturnMaterial retMat = new ReturnMaterial();
-				retMat.getFrame().setVisible(true);
-				dispose();
-				}
-		});*/
 		/*
 		 * This button lets you go to the search window to search for an item.
+		 * It opens up the window for search
 		 */
 		btnSearchForBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
