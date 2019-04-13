@@ -140,7 +140,7 @@ public class Register extends JDialog {
 
 	// Method to create events
 	private void createEvents() {
-		// This method takes all the inputs the user has inputted and creates a new student and stores them. Which allows the user to be 
+		// This method takes all the inputs the user has inputed and creates a new student and stores them. Which allows the user to be 
 		// signed up.
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,7 +153,9 @@ public class Register extends JDialog {
 				String lName = lastName.getText();	
 				String uc = iD.getText();
 				int ucid = Integer.parseInt(uc);
-
+					
+				// Checks if the password is strong
+				
 				if (isStrong(pWord) == true) {
 					Student ins = new Student(fName, lName, ucid, 0, true, uName, pWord, false);
 					stu.add(ins);	

@@ -63,7 +63,7 @@ public class ManageMaterialsView {
 		activeFrame.setBounds(100, 100, 587, 505);
 		activeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
+	
 		
 		dataActive = new DefaultTableModel(0, 0);
 		
@@ -90,7 +90,7 @@ public class ManageMaterialsView {
 		moveToArchiveBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String idS = JOptionPane.showInputDialog(activeFrame, "Which Material would you like to delete?", null);
+				String idS = JOptionPane.showInputDialog(activeFrame, "Which Material would you like to delete? (Input id)", null);
 				boolean success = false;
 				
 				try {

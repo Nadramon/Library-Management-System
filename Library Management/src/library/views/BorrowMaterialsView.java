@@ -1,4 +1,4 @@
-// This is the window to Borrow Materials, It pop ups a search so users can search for books/materials
+// This is the window to Borrow Materials, It pop ups a search UI so users can search for books/materials
 
 package library.views;
 
@@ -26,7 +26,7 @@ import java.awt.Color;
 public class BorrowMaterialsView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textFieldSearch;
 	private JButton btnSearch;
 	private JComboBox comboBox_BM;
 	private JLabel lblBy;
@@ -59,8 +59,8 @@ public class BorrowMaterialsView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		textFieldSearch = new JTextField();
+		textFieldSearch.setColumns(10);
 		
 		btnSearch = new JButton("Search");
 		
@@ -75,25 +75,36 @@ public class BorrowMaterialsView extends JFrame {
 		comboBox_Aut.setModel(new DefaultComboBoxModel(new String[] {"Author", "Name", "ID"}));
 		
 		lblSearchThe = new JLabel("Search the");
+		
+		JButton btnDisplayListOf = new JButton("Display List of Books");
+		
+		JButton btnDisplayListOf_1 = new JButton("Display List of Materials");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(26)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnSearch))
+							.addGap(26)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(textFieldSearch, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(btnSearch))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblSearchThe)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(comboBox_BM, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+									.addGap(10)
+									.addComponent(lblBy)
+									.addGap(18)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnDisplayListOf_1)
+										.addComponent(comboBox_Aut, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)))))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblSearchThe)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(comboBox_BM, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(lblBy)
-							.addGap(18)
-							.addComponent(comboBox_Aut, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(121, Short.MAX_VALUE))
+							.addGap(37)
+							.addComponent(btnDisplayListOf)))
+					.addContainerGap(69, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -106,9 +117,13 @@ public class BorrowMaterialsView extends JFrame {
 						.addComponent(comboBox_BM, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnSearch))
-					.addContainerGap(54, Short.MAX_VALUE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnDisplayListOf)
+						.addComponent(btnDisplayListOf_1))
+					.addContainerGap(13, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 		createEvents(user);
@@ -117,12 +132,16 @@ public class BorrowMaterialsView extends JFrame {
 	private void createEvents(ManageUsers user) {
 		// The search button searches for the items based on categories of search and name
 		// If The item exists in the list then it opens a window with the list
-		// If the item doesn't exist  a popup appears
+		// If the item doesn't exist  a popup appears (Currently doesnt work)
+		// Also popups a not possible notification if the combination doesnt make sense
+		
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String typeOfSearch = (String) comboBox_BM.getSelectedItem();
 				String typeOfMaterial = (String) comboBox_Aut.getSelectedItem();
 				ArrayList<Material> materialList = new ArrayList<Material>();
+				String search = textFieldSearch.getText();
+				
 				
 				if (typeOfSearch == "Books") {
 					
@@ -183,7 +202,7 @@ public class BorrowMaterialsView extends JFrame {
 						 }
 					 }
 				}
-				
+
 			}
 		});
 	}
@@ -211,6 +230,5 @@ public class BorrowMaterialsView extends JFrame {
 				
 		
 	}
-	
 }
 

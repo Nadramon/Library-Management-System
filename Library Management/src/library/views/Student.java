@@ -23,7 +23,7 @@ public class Student {
     private byte[]  salt;
     private String  passwordo 			= "";
     private boolean isLibrarian			= false;
-
+    private int fee;
 
 	
 	
@@ -48,7 +48,9 @@ public class Student {
         isLibrarian = isLib;
         
     }
-
+/*
+ *  Massive list of just getters and setters
+ */
 	public String getUsername() {return username;}
 
 	public boolean getIsLibrarian() {
@@ -110,7 +112,9 @@ public class Student {
 		this.isActive = isActive;
 	}
 	
-	
+/*
+ * This password generation was attempted to be implemented however it was not implemented.
+ */
 	//password generation from 
     //https://www.javacodegeeks.com/2012/05/secure-password-storage-donts-dos-and.html
     public boolean generatePassword(String pw) {

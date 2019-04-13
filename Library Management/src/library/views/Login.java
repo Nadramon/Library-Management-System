@@ -125,10 +125,12 @@ public class Login extends JFrame {
     }
 	
 
-	// create events
+	/*
+	 * This method is where all the different functionality of the UI goes such as the buttons
+	 */
 	private void createEvents(Student stu ,ManageUsers users) {
 		/*
-		 * This method sets up a button in order to open the ManageUsersGUI
+		 * This method sets up a button in order to open the ManageUsersGUI which allows users to manage users
 		 */
 		btnManageUsers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -138,7 +140,9 @@ public class Login extends JFrame {
 			dispose();
 			}
 		});
-		
+		/*
+		 * This button/method sets up a button in order to open the ManageMaterialsView which allows users to manage materials
+		 */
 		btnManageMaterials.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			ManageMaterialsView manageUsers = new ManageMaterialsView(stu);

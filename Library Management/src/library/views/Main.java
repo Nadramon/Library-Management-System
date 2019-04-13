@@ -21,7 +21,6 @@ public class Main {
 		ManageUsers.getActiveList().add(ins);
 		ManageUsers.getActiveList().add(stu);
 
-		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		//calculate the deadline date

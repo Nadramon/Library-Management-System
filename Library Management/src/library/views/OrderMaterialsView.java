@@ -16,7 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+/*
+ * This Class generates a form in order for students to place an order for materials
+ */
 public class OrderMaterialsView extends JFrame {
 
 	private JPanel contentPane;
@@ -54,8 +56,6 @@ public class OrderMaterialsView extends JFrame {
 		btnPlaceOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(contentPane, "Your Order has been sent for a review!", "Info", JOptionPane.INFORMATION_MESSAGE);
-				StudentView log = new StudentView(stu,students);
-				log.setVisible(true);
 				dispose();
 
 			}

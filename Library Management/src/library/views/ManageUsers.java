@@ -1,5 +1,7 @@
 package library.views;
-
+/*
+ * This Class has all the Arraylists storing the different information needed for this system to work. 
+ */
 import java.util.ArrayList;
 
 public class ManageUsers {
@@ -9,6 +11,9 @@ public class ManageUsers {
 	private static ArrayList<Material> materialList = new ArrayList<Material>();
 	private static ArrayList<Borrowings> borrowingList = new ArrayList<Borrowings>();
 	
+	/*
+	 * Bunch of getters and setters
+	 */
 	public static ArrayList<Borrowings> getBorrowingList() {
 		return borrowingList;
 	}

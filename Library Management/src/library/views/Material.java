@@ -90,4 +90,10 @@ public class Material {
     public void setCountAvailable(int i) {
         countAvailable += i;
     }
+    
+    public String getAuthor() {
+    	return "";
+    }
+
+    
 }
