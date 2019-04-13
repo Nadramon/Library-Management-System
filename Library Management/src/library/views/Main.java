@@ -21,17 +21,17 @@ public class Main {
 		ManageUsers.getActiveList().add(ins);
 		ManageUsers.getActiveList().add(stu);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
+		//For testing the deadline overdue in returning a material
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");	
 		//calculate the deadline date
 		Date currentDate = new Date();
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(2017, 2, 23);
+		calendar.set(2017, 2, 23); // some random old date
 		Date deadline = null;
 		try {
 			deadline = sdf.parse(sdf.format(calendar.getTime()));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

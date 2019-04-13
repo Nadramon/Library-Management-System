@@ -207,6 +207,14 @@ public class BorrowMaterialsView extends JFrame {
 		});
 	}
 	
+	
+	/**
+	 * 
+	 * @param listToSort
+	 * @return ArrayList<Material>
+	 * 
+	 * Bubble sort was used to sort the materials in order of Name
+	 */
 	private ArrayList<Material> rearrangeList(ArrayList<Material> listToSort) {
 
 		int size = listToSort.size();

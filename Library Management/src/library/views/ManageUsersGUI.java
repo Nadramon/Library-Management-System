@@ -30,6 +30,12 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 
+/**
+ * 
+ * Class is for managing the users, deleting, moving, changing
+ *
+ */
+
 public class ManageUsersGUI {
 
 	private JFrame activeFrame;
@@ -97,16 +103,18 @@ public class ManageUsersGUI {
 		activeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		
+		//make new table
 		dataActive = new DefaultTableModel(0, 0);
 		
-		
+		//header
 		header = new String[] {"UCID", "First Name", "Last Name", "Borrowing"};
 		
 		dataActive.setColumnIdentifiers(header);
 		
+		//set row 0 for the headers
 		dataActive.addRow(new Object[] {"UCID", "F Name", "L Name", "Borrowing"});
 		
+		//add all the data on the list
 		for (int x = 0; x <= activeList.size() - 1; x++) {
 			dataActive.addRow(new Object[] {activeList.get(x).getUcid(), activeList.get(x).getFirstName(), activeList.get(x).getLastName(), activeList.get(x).getCurrentBorrowing()});
 		}
@@ -120,12 +128,14 @@ public class ManageUsersGUI {
 		
 		activeTable.setModel(dataActive);
 		
+		
+		//button for moving an active acc to archive
 		moveToArchiveBtn = new JButton("Move to Archive");
 		moveToArchiveBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		
+		//action
 		moveToArchiveBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
@@ -135,6 +145,7 @@ public class ManageUsersGUI {
 				try {
 					int id = Integer.parseInt(idS);
 					int index = 0;
+					//find index of account
 					for (int x = 0; x < activeList.size(); x++) {
 						if (id == activeList.get(x).getUcid()) {
 							index = x;
@@ -183,7 +194,7 @@ public class ManageUsersGUI {
 		});
 		
 		
-		
+		//to go back to the librarian interface
 		JButton backBtn = new JButton("Back");
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -297,6 +308,7 @@ public class ManageUsersGUI {
 	}
 	
 
+	//functions same as above, but the opposite
 	private void initArchived(Student stud) {
 		
 		

@@ -18,6 +18,11 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
+
+
+/**
+ * Class for managing materials for the librarian, can view, delete and edit
+ */
 public class ManageMaterialsView {
 
 	private JFrame activeFrame;
@@ -26,10 +31,10 @@ public class ManageMaterialsView {
 	private ArrayList<Student> activeList = new ArrayList<Student>();
 	private ArrayList<Student> archiveList = new ArrayList<Student>();
 	private JLabel activeLabel;
-	private JButton moveToArchiveBtn;
+	private JButton deleteBtn;
 	private JLabel archivedLabel;
 	private JTable archivedTable;
-	private JButton moveToActiveBtn;
+	private JButton editBtn;
 	private DefaultTableModel dataActive;
 	private DefaultTableModel dataArchive;
 	private String[] header;
@@ -41,8 +46,7 @@ public class ManageMaterialsView {
 	public ManageMaterialsView(Student stud) {
 		stu = stud;
 
-		
-		
+
 		
 		try {
 			initActive(stud);
@@ -64,19 +68,20 @@ public class ManageMaterialsView {
 		activeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	
-		
+		//Make a table for the materials
 		dataActive = new DefaultTableModel(0, 0);
 		
-		
+		//headers for the table
 		header = new String[] {"ID", "Type", "Name", "Total", "Available"};
 		
 		dataActive.setColumnIdentifiers(header);
-		
+		//first row is the header
 		dataActive.addRow(new Object[] {"ID", "Type", "Name", "Total", "Available"});
-		
+		//add all the data
 		for (int x = 0; x <= ManageUsers.getMaterialList().size() - 1; x++) {
 			dataActive.addRow(new Object[] {ManageUsers.getMaterialList().get(x).getID(), ManageUsers.getMaterialList().get(x).getType(), ManageUsers.getMaterialList().get(x).getName(), ManageUsers.getMaterialList().get(x).getTotalInLibrary(), ManageUsers.getMaterialList().get(x).getCountAvailable()});
 		
+		//make label to identify the info
 		activeLabel = new JLabel("Materials");
 		activeLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		activeLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -86,16 +91,19 @@ public class ManageMaterialsView {
 		
 		activeTable.setModel(dataActive);
 		
-		moveToArchiveBtn = new JButton("Delete Material");
-		moveToArchiveBtn.addActionListener(new ActionListener() {
+		//Button for deleting material
+		deleteBtn = new JButton("Delete Material");
+		deleteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				//bring up input
 				String idS = JOptionPane.showInputDialog(activeFrame, "Which Material would you like to delete? (Input id)", null);
 				boolean success = false;
 				
 				try {
 					int id = Integer.parseInt(idS);
 					int index = 0;
+					//find the index of the material
 					for (int x = 0; x < ManageUsers.getMaterialList().size(); x++) {
 						if (id == ManageUsers.getMaterialList().get(x).getID()) {
 							index = x;
@@ -115,10 +123,10 @@ public class ManageMaterialsView {
 							dataActive.removeRow(1);
 						}
 
-						//remove the student from active and add to archive
+						//remove the material from the list
 						ManageUsers.getMaterialList().remove(index);
 						
-						//put every active dstudent on the table
+						//put every material back on the table
 						for (int x = 0; x <= ManageUsers.getMaterialList().size() - 1; x++) {
 							dataActive.addRow(new Object[] {ManageUsers.getMaterialList().get(x).getID(), ManageUsers.getMaterialList().get(x).getType(), ManageUsers.getMaterialList().get(x).getName(), ManageUsers.getMaterialList().get(x).getTotalInLibrary(), ManageUsers.getMaterialList().get(x).getCountAvailable()});
 						}
@@ -136,11 +144,12 @@ public class ManageMaterialsView {
 			}
 		});
 		
-		
-		moveToActiveBtn = new JButton("Edit Material");
-		moveToActiveBtn.addActionListener(new ActionListener() {
+		//button for editing material
+		editBtn = new JButton("Edit Material");
+		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				//functions same as above
 				String idS = JOptionPane.showInputDialog(activeFrame, "Which Material would you like to edit?", null);
 				String quantityS = JOptionPane.showInputDialog(activeFrame, "How many would you like to add on/remove? (Negatives for remove)", null);
 				boolean success = false;
@@ -168,10 +177,10 @@ public class ManageMaterialsView {
 							dataActive.removeRow(1);
 						}
 
-						//remove the student from active and add to archive
+						//update the material (adding or removing X number of materials)
 						ManageUsers.getMaterialList().get(index).addItems(quantity);
 						
-						//put every active dstudent on the table
+						
 						for (int x = 0; x <= ManageUsers.getMaterialList().size() - 1; x++) {
 							dataActive.addRow(new Object[] {ManageUsers.getMaterialList().get(x).getID(), ManageUsers.getMaterialList().get(x).getType(), ManageUsers.getMaterialList().get(x).getName(), ManageUsers.getMaterialList().get(x).getTotalInLibrary(), ManageUsers.getMaterialList().get(x).getCountAvailable()});
 						}
@@ -190,7 +199,7 @@ public class ManageMaterialsView {
 		});
 		
 		
-		
+		//button for going back
 		JButton backBtn = new JButton("Back");
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -213,9 +222,9 @@ public class ManageMaterialsView {
 					.addComponent(activeLabel, GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
 					.addGap(24))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(moveToActiveBtn, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+					.addComponent(editBtn, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(moveToArchiveBtn, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+					.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
 					//.addComponent(makeLibrarianBtn, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
 					//.addPreferredGap(ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
@@ -231,8 +240,8 @@ public class ManageMaterialsView {
 					.addComponent(activeTable, GroupLayout.PREFERRED_SIZE, 353, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(moveToActiveBtn, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-						.addComponent(moveToArchiveBtn, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(editBtn, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(deleteBtn, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 						//.addComponent(makeLibrarianBtn, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 						.addComponent(backBtn))
 					.addGap(134))
